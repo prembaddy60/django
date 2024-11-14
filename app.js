@@ -1,77 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes App</title>
+// Firebase Configuration (Replace these values with your own Firebase credentials)
+const firebaseConfig = {
+    apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",   // Your Firebase API Key
+    authDomain: "django-eb349.firebaseapp.com",        // Your Firebase Auth Domain
+    databaseURL: "https://django-eb349-default-rtdb.asia-southeast1.firebasedatabase.app",  // Your Firebase Database URL
+    projectId: "django-eb349",                         // Your Firebase Project ID
+    storageBucket: "django-eb349.appspot.com",         // Your Firebase Storage Bucket
+    messagingSenderId: "271670409370",                 // Your Messaging Sender ID
+    appId: "1:271670409370:web:51498b4b417669173f8723" // Your App ID
+};
 
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
+// Initialize Firebase
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+} else {
+    firebase.app(); // Use the existing Firebase app
+}
 
-    <!-- Link to custom JavaScript (app.js) -->
-    <script type="module" defer src="app.js"></script>
+const database = firebase.database();
 
-    <style>
-        /* Basic CSS Styling */
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
+// DOM Elements
+const noteInput = document.getElementById('noteInput');
+const saveNoteBtn = document.getElementById('saveNoteBtn');
+const notesList = document.getElementById('notesList');
+
+// Save note to Firebase
+saveNoteBtn.addEventListener('click', () => {
+    const noteText = noteInput.value.trim();
+    
+    console.log("Note Text to Save:", noteText);  // Debugging: Log the note text
+
+    if (noteText !== "") {
+        const newNoteRef = database.ref('notes').push();  // Push to 'notes' collection in Firebase
+
+        newNoteRef.set({
+            note: noteText
+        }).then(() => {
+            console.log("Note saved successfully!");
+            noteInput.value = "";  // Clear the input field after saving
+            loadNotes();  // Reload notes again to display them
+        }).catch((error) => {
+            console.error("Error saving note:", error);  // Log errors if any occur
+        });
+    }
+});
+
+// Load notes from Firebase
+function loadNotes() {
+    notesList.innerHTML = '';  // Clear the existing notes
+
+    const notesRef = database.ref('notes');
+    notesRef.once('value', (snapshot) => {
+        const notesData = snapshot.val();
+        console.log("Loaded Notes:", notesData);
+
+        if (notesData) {
+            Object.keys(notesData).forEach(key => {
+                const note = notesData[key].note;
+                const li = document.createElement('li');
+                li.textContent = note;
+                notesList.appendChild(li);  // Append each note to the list
+            });
+        } else {
+            console.log("No notes found.");
         }
+    });
+}
 
-        #noteInput {
-            padding: 10px;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        #saveNoteBtn {
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        #saveNoteBtn:hover {
-            background-color: #45a049;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            background-color: #f1f1f1;
-            margin: 5px 0;
-            padding: 10px;
-        }
-
-        /* Success message styling */
-        #successMessage {
-            color: green;
-            font-size: 18px;
-            margin-top: 20px;
-            display: none;  /* Hidden by default */
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Notes App</h1>
-
-    <!-- Note input form -->
-    <div>
-        <textarea id="noteInput" placeholder="Write your note here..."></textarea><br>
-        <button id="saveNoteBtn">Save Note</button>
-    </div>
-
-    <!-- Success message -->
-    <div id="successMessage">Note saved successfully!</div>
-
-    <h2>Saved Notes</h2>
-    <ul id="notesList"></ul>
-
-</body>
-</html>
+// Initial load when the page is loaded
+window.onload = function() {
+    loadNotes();
+};
