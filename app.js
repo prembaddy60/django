@@ -1,3 +1,7 @@
+// Import the necessary Firebase SDKs
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+import { getDatabase, ref, push, set, get, child } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
+
 // Firebase Configuration (Replace these values with your own Firebase credentials)
 const firebaseConfig = {
     apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",   // Your Firebase API Key
@@ -10,13 +14,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-} else {
-    firebase.app(); // Use the existing Firebase app
-}
-
-const database = firebase.database();
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
 // DOM Elements
 const noteInput = document.getElementById('noteInput');
@@ -30,9 +29,10 @@ saveNoteBtn.addEventListener('click', () => {
     console.log("Note Text to Save:", noteText);  // Debugging: Log the note text
 
     if (noteText !== "") {
-        const newNoteRef = database.ref('notes').push();  // Push to 'notes' collection in Firebase
+        const notesRef = ref(database, 'notes');  // Reference to 'notes' in Firebase
+        const newNoteRef = push(notesRef);  // Push to 'notes' collection in Firebase
 
-        newNoteRef.set({
+        set(newNoteRef, {
             note: noteText
         }).then(() => {
             console.log("Note saved successfully!");
@@ -48,8 +48,8 @@ saveNoteBtn.addEventListener('click', () => {
 function loadNotes() {
     notesList.innerHTML = '';  // Clear the existing notes
 
-    const notesRef = database.ref('notes');
-    notesRef.once('value', (snapshot) => {
+    const notesRef = ref(database, 'notes');
+    get(notesRef).then((snapshot) => {
         const notesData = snapshot.val();
         console.log("Loaded Notes:", notesData);
 
@@ -63,6 +63,8 @@ function loadNotes() {
         } else {
             console.log("No notes found.");
         }
+    }).catch((error) => {
+        console.error("Error loading notes:", error);  // Log errors if any occur
     });
 }
 
