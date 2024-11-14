@@ -22,6 +22,7 @@ const database = firebase.database();
 const noteInput = document.getElementById('noteInput');
 const userNameInput = document.getElementById('userNameInput');
 const saveNoteBtn = document.getElementById('saveNoteBtn');
+const successMessage = document.getElementById('successMessage');
 
 // Save note to Firebase
 saveNoteBtn.addEventListener('click', () => {
@@ -37,8 +38,17 @@ saveNoteBtn.addEventListener('click', () => {
             timestamp: Date.now()
         }).then(() => {
             console.log("Note saved successfully!");
-            noteInput.value = "";  // Clear the note input field after saving
-            userNameInput.value = "";  // Clear the username input field
+            // Clear the note input field and user name field
+            noteInput.value = "";
+            userNameInput.value = "";
+
+            // Show success message
+            successMessage.style.display = "block";
+
+            // Hide the success message after 3 seconds
+            setTimeout(() => {
+                successMessage.style.display = "none";
+            }, 3000);
         }).catch((error) => {
             console.error("Error saving note:", error);  // Log errors if any occur
         });
