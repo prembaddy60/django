@@ -25,6 +25,12 @@
             margin-bottom: 10px;
         }
 
+        #userNameInput {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
         #saveNoteBtn {
             padding: 10px;
             background-color: #4CAF50;
@@ -44,6 +50,11 @@
             margin-top: 20px;
             display: none;  /* Hidden by default */
         }
+
+        .view-notes-link {
+            margin-top: 20px;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -52,12 +63,16 @@
 
     <!-- Note input form -->
     <div>
+        <input type="text" id="userNameInput" placeholder="Enter your name"><br>
         <textarea id="noteInput" placeholder="Write your note here..."></textarea><br>
         <button id="saveNoteBtn">Save Note</button>
     </div>
 
     <!-- Success message -->
     <div id="successMessage">Note saved successfully!</div>
+
+    <!-- Link to view saved notes -->
+    <a href="viewNotes.html" class="view-notes-link">View Saved Notes</a>
 
 </body>
 </html>
