@@ -9,7 +9,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
 
-    <!-- Link to custom JavaScript (viewNotes.js) -->
     <script type="module" defer src="viewNotes.js"></script>
 
     <style>
@@ -29,6 +28,23 @@
             margin: 5px 0;
             padding: 10px;
         }
+
+        .note-user {
+            font-weight: bold;
+        }
+
+        .note-timestamp {
+            color: grey;
+            font-size: 0.9em;
+        }
+
+        .back-to-main {
+            margin-top: 20px;
+            display: block;
+            text-decoration: none;
+            font-weight: bold;
+            color: #4CAF50;
+        }
     </style>
 </head>
 <body>
@@ -36,5 +52,9 @@
     <h1>Saved Notes</h1>
     <ul id="notesList"></ul>
 
+    <!-- Link back to the main page -->
+    <a href="index.html" class="back-to-main">Back to Home</a>
+
 </body>
 </html>
+
