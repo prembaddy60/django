@@ -1,47 +1,49 @@
-// Import necessary Firebase SDKs
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
-import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
-
-// Firebase Configuration (use the same credentials as your app)
+// Firebase Configuration (same as your app.js)
 const firebaseConfig = {
-    apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",   // Your Firebase API Key
-    authDomain: "django-eb349.firebaseapp.com",        // Your Firebase Auth Domain
-    databaseURL: "https://django-eb349-default-rtdb.asia-southeast1.firebasedatabase.app",  // Your Firebase Database URL
-    projectId: "django-eb349",                         // Your Firebase Project ID
-    storageBucket: "django-eb349.appspot.com",         // Your Firebase Storage Bucket
-    messagingSenderId: "271670409370",                 // Your Messaging Sender ID
-    appId: "1:271670409370:web:51498b4b417669173f8723" // Your App ID
+    apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
+    authDomain: "django-eb349.firebaseapp.com",
+    databaseURL: "https://django-eb349-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "django-eb349",
+    storageBucket: "django-eb349.appspot.com",
+    messagingSenderId: "271670409370",
+    appId: "1:271670409370:web:51498b4b417669173f8723"
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+} else {
+    firebase.app();
+}
 
-// DOM Elements
-const notesList = document.getElementById('notesList');
+const database = firebase.database();
 
-// Function to load and display notes
-function loadNotes() {
-    const notesRef = ref(database, 'notes');
-    
-    get(notesRef).then((snapshot) => {
-        if (snapshot.exists()) {
-            const notesData = snapshot.val();
+// Load notes from Firebase
+window.onload = function() {
+    const notesList = document.getElementById('notesList');
+    notesList.innerHTML = '';  // Clear the existing notes
+
+    const notesRef = database.ref('notes');
+    notesRef.once('value', (snapshot) => {
+        const notesData = snapshot.val();
+        if (notesData) {
             Object.keys(notesData).forEach(key => {
                 const note = notesData[key].note;
+                const user = notesData[key].user;
+                const timestamp = notesData[key].timestamp;
+
+                // Format date from timestamp (optional)
+                const date = new Date(timestamp);
+                const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+
                 const li = document.createElement('li');
-                li.textContent = note;
-                notesList.appendChild(li); // Add each note as a list item
+                li.innerHTML = `<div class="note-user">${user}</div>
+                               <div class="note-timestamp">${formattedDate}</div>
+                               <div class="note-text">${note}</div>`;
+                notesList.appendChild(li);  // Append each note to the list
             });
         } else {
             console.log("No notes found.");
         }
-    }).catch((error) => {
-        console.error("Error loading notes:", error);
     });
-}
-
-// Call the loadNotes function when the page is loaded
-window.onload = function() {
-    loadNotes();
 };
