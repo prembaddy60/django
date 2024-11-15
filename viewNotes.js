@@ -1,4 +1,4 @@
-// Firebase Configuration (same as in your app.js)
+// Firebase Configuration (same as in app.js)
 const firebaseConfig = {
     apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
     authDomain: "django-eb349.firebaseapp.com",
@@ -20,36 +20,43 @@ const database = firebase.database();
 
 window.onload = function() {
     const notesList = document.getElementById('notesList');
-    notesList.innerHTML = '';  // Clear existing notes
+    notesList.innerHTML = '';  // Clear any existing notes before displaying new ones
 
-    const notesRef = database.ref('notes');
+    const notesRef = database.ref('notes');  // Reference to the 'notes' node in Firebase
     
-    // Use 'on' for real-time updates
+    // Use 'on' to listen for changes in real-time
     notesRef.on('value', (snapshot) => {
-        const notesData = snapshot.val();
-        notesList.innerHTML = '';  // Clear list to avoid duplicates
+        const notesData = snapshot.val();  // Get the data from Firebase
+        notesList.innerHTML = '';  // Clear the list to prevent duplicate notes
 
         if (notesData) {
+            // Iterate over each note in the data
             Object.keys(notesData).forEach(key => {
                 const note = notesData[key].note;
                 const user = notesData[key].user;
                 const timestamp = notesData[key].timestamp;
 
-                // Format date from timestamp
+                // Format the timestamp into a readable date format
                 const date = new Date(timestamp);
                 const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-                // Create list item with note data
+                // Create a list item to display the note
                 const li = document.createElement('li');
-                li.innerHTML = `<div class="note-user"><strong>${user}</strong></div>
-                               <div class="note-timestamp">${formattedDate}</div>
-                               <div class="note-text">${note}</div>`;
-                notesList.appendChild(li);  // Append each note to the list
+                li.innerHTML = `
+                    <div class="note-user"><strong>${user}</strong></div>
+                    <div class="note-timestamp">${formattedDate}</div>
+                    <div class="note-text">${note}</div>
+                `;
+                notesList.appendChild(li);  // Append the note to the list
             });
         } else {
-            // Display a message if no notes are found
-            notesList.innerHTML = "<li>No notes found.</li>";
+            // If no notes are available, display a message
+            const noNotesLi = document.createElement('li');
+            noNotesLi.classList.add('no-notes');
+            noNotesLi.textContent = 'No notes found.';
+            notesList.appendChild(noNotesLi);
         }
     });
 };
+
 
