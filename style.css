@@ -1,47 +1,78 @@
-/* style.css */
+/* Basic CSS Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
 }
 
-#app {
-    margin: 20px;
-    max-width: 600px;
-    margin: auto;
-}
-
-textarea {
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
     width: 100%;
-    padding: 10px;
+    text-align: center;
+}
+
+h1 {
+    color: #4CAF50;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 15px;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 5px;
+    font-size: 1.1em;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
 }
 
 button {
-    padding: 10px 20px;
+    width: 100%;
+    padding: 15px;
     background-color: #4CAF50;
     color: white;
+    font-size: 1.2em;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
     background-color: #45a049;
 }
 
-#savedNotes ul {
-    list-style-type: none;
-    padding: 0;
+#successMessage {
+    color: green;
+    font-size: 1.2em;
+    margin-top: 20px;
+    display: none;
 }
 
-#savedNotes li {
-    background-color: #fff;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+/* Responsive design */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .container {
+        padding: 20px;
+    }
 }
