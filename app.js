@@ -1,8 +1,8 @@
-// Import necessary Firebase modules (v9+ uses modular imports)
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js';
-import { getDatabase, ref, set } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js';
+// Import necessary Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 
-// Firebase Configuration (replace these values with your own)
+// Firebase Configuration (replace with your own Firebase credentials)
 const firebaseConfig = {
     apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
     authDomain: "django-eb349.firebaseapp.com",
@@ -13,9 +13,9 @@ const firebaseConfig = {
     appId: "1:271670409370:web:51498b4b417669173f8723"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);  // Initialize Firebase App
-const database = getDatabase(app);          // Get a reference to the database
+// Initialize Firebase App
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app); // Get reference to Firebase Realtime Database
 
 // DOM Elements
 const noteInput = document.getElementById('noteInput');
@@ -29,9 +29,9 @@ saveNoteBtn.addEventListener('click', () => {
     const userName = userNameInput.value.trim();
 
     if (noteText !== "" && userName !== "") {
-        const newNoteRef = ref(database, 'notes/' + Date.now());  // Reference to the notes collection
+        const newNoteRef = ref(database, 'notes/' + Date.now()); // Create a reference for a new note
 
-        // Save the note data
+        // Save the note to Firebase Realtime Database
         set(newNoteRef, {
             user: userName,
             note: noteText,
@@ -39,14 +39,15 @@ saveNoteBtn.addEventListener('click', () => {
         })
         .then(() => {
             console.log("Note saved successfully!");
-            // Clear input fields after saving
+
+            // Clear input fields
             noteInput.value = "";
             userNameInput.value = "";
 
             // Show success message
             successMessage.style.display = "block";
 
-            // Hide the success message after 3 seconds
+            // Hide success message after 3 seconds
             setTimeout(() => {
                 successMessage.style.display = "none";
             }, 3000);
