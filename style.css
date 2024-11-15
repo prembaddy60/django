@@ -1,110 +1,110 @@
 /* Basic CSS Styling */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    background-color: #1c1c1c;  /* Dark theme */
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: #333;
+    color: #f1f1f1;
+    text-align: center;
+    animation: fadeIn 2s ease-out; /* Fade in animation for body */
 }
 
+/* Container for the notes */
 .container {
-    background-color: #ffffff;
+    background-color: #2d2d2d; /* Dark container */
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
     max-width: 500px;
     width: 100%;
-    text-align: center;
 }
 
+/* Heading with a Batman font style */
 h1 {
-    color: #4CAF50;
-    font-size: 2.5em;
+    font-family: 'Bangers', sans-serif; /* Batman-style font */
+    color: #f0e68c; /* Yellow color resembling Batman theme */
+    font-size: 3em;
     margin-bottom: 20px;
+    text-shadow: 3px 3px 10px #333;
 }
 
+/* Input and textarea styles */
 input, textarea {
     width: 100%;
     padding: 15px;
     margin: 10px 0;
-    border: 1px solid #ddd;
+    border: 1px solid #333;
     border-radius: 5px;
     font-size: 1.1em;
-    background-color: #f9f9f9;
-    transition: all 0.3s ease;
+    background-color: #444;
+    color: #f1f1f1;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
 
+/* Focus effect on input fields */
 input:focus, textarea:focus {
-    border-color: #4CAF50;
+    background-color: #555; 
+    border-color: #f0e68c;
     outline: none;
 }
 
+/* Button styling */
 button {
     width: 100%;
     padding: 15px;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #f0e68c;
+    color: #1c1c1c;
     font-size: 1.2em;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: transform 0.2s, background-color 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Button hover effect */
 button:hover {
-    background-color: #45a049;
+    background-color: #ffcc00;
+    transform: scale(1.05); /* Slight scaling effect on hover */
 }
 
+/* Success message styling */
 #successMessage {
-    color: green;
+    color: #f0e68c;
     font-size: 1.2em;
     margin-top: 20px;
     display: none;
+    animation: bounceIn 1s ease; /* Bounce-in effect */
 }
 
-/* Lollipop animation */
-.lollipop {
-    width: 50px;
-    height: 50px;
-    background-color: #FF69B4; /* Lollipop Color */
-    border-radius: 50%;
-    position: absolute;
-    top: 20%; /* Adjust based on your screen size */
-    left: 50%;
-    transform: translateX(-50%);
-    animation: dance 2s ease-in-out infinite; /* Animation applied here */
+/* Fade-in animation for body */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
 
-/* Lollipop stick */
-.lollipop::after {
-    content: "";
-    width: 5px;
-    height: 50px;
-    background-color: #FF69B4;
-    position: absolute;
-    bottom: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* Animation: Dancing Lollipop */
-@keyframes dance {
-    0%, 100% {
-        transform: translateY(0); /* Move up and down */
+/* Bounce-in effect for success message */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
     }
     50% {
-        transform: translateY(-20px); /* Move up */
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
     }
 }
 
 /* Responsive design */
 @media (max-width: 600px) {
     h1 {
-        font-size: 2em;
+        font-size: 2.5em;
     }
 
     .container {
