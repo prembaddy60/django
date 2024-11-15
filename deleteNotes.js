@@ -1,3 +1,7 @@
+// Import Firebase and Firebase Database from the Firebase SDK
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+import { getDatabase, ref, remove, get } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
+
 // Firebase Configuration (same as your app.js)
 const firebaseConfig = {
     apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
@@ -10,21 +14,16 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-} else {
-    firebase.app(); // Use the existing Firebase app
-}
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
-const database = firebase.database();
-
-// Fetch and display notes with delete buttons
+// Fetch notes from Firebase and display them with a delete button
 window.onload = function() {
     const notesList = document.getElementById('notesList');
     notesList.innerHTML = '';  // Clear the existing notes
 
-    const notesRef = database.ref('notes');
-    notesRef.once('value', (snapshot) => {
+    const notesRef = ref(database, 'notes');
+    get(notesRef).then((snapshot) => {
         const notesData = snapshot.val();
         if (notesData) {
             Object.keys(notesData).forEach(key => {
@@ -32,7 +31,7 @@ window.onload = function() {
                 const user = notesData[key].user;
                 const timestamp = notesData[key].timestamp;
 
-                // Format date from timestamp
+                // Format date from timestamp (optional)
                 const date = new Date(timestamp);
                 const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
@@ -41,36 +40,36 @@ window.onload = function() {
                                <div class="note-timestamp">${formattedDate}</div>
                                <div class="note-text">${note}</div>
                                <button class="delete-btn" data-id="${key}">Delete</button>`;
-                notesList.appendChild(li);  // Append each note to the list
-            });
+                notesList.appendChild(li);
 
-            // Attach delete event listeners
-            const deleteButtons = document.querySelectorAll('.delete-btn');
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const noteId = this.getAttribute('data-id');
-                    deleteNote(noteId);
-                });
+                // Add event listener for the delete button
+                const deleteBtn = li.querySelector('.delete-btn');
+                deleteBtn.addEventListener('click', () => deleteNoteFromFirebase(key));
             });
         } else {
-            notesList.innerHTML = "<li>No notes found.</li>";
+            const noNotesMessage = document.createElement('li');
+            noNotesMessage.classList.add('no-notes');
+            noNotesMessage.textContent = "No notes available!";
+            notesList.appendChild(noNotesMessage);
         }
+    }).catch((error) => {
+        console.error("Error fetching notes:", error);
     });
 };
 
-// Function to delete note
-function deleteNote(noteId) {
-    const noteRef = database.ref('notes/' + noteId);
-    noteRef.remove()
+// Delete note from Firebase
+function deleteNoteFromFirebase(noteId) {
+    const noteRef = ref(database, 'notes/' + noteId);
+    remove(noteRef)
         .then(() => {
-            console.log("Note deleted successfully");
-            // Reload notes after deletion
-            window.location.reload();
+            alert("Note deleted successfully");
+            window.location.reload(); // Reload the page to update the list
         })
         .catch((error) => {
             console.error("Error deleting note:", error);
         });
 }
+
 
 
 
