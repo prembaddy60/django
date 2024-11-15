@@ -1,3 +1,7 @@
+// Import necessary Firebase modules
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js';
+import { getDatabase, ref, get, remove } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js';
+
 // Firebase Configuration (same as your app.js)
 const firebaseConfig = {
     apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
@@ -10,21 +14,18 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-} else {
-    firebase.app(); // Use the existing Firebase app
-}
+const app = initializeApp(firebaseConfig);
 
-const database = firebase.database();
+// Get a reference to the Firebase Realtime Database
+const database = getDatabase(app);
 
 // Load notes from Firebase and display them
 window.onload = function() {
     const notesList = document.getElementById('notesList');
     notesList.innerHTML = '';  // Clear the existing notes list
 
-    const notesRef = database.ref('notes');
-    notesRef.once('value', (snapshot) => {
+    const notesRef = ref(database, 'notes');
+    get(notesRef).then((snapshot) => {
         const notesData = snapshot.val();
         if (notesData) {
             Object.keys(notesData).forEach(key => {
@@ -66,8 +67,8 @@ window.onload = function() {
 
 // Function to delete note from Firebase
 function deleteNote(noteId) {
-    const noteRef = database.ref('notes/' + noteId);  // Reference the specific note
-    noteRef.remove()  // Remove the note from Firebase
+    const noteRef = ref(database, 'notes/' + noteId);  // Reference the specific note
+    remove(noteRef)  // Remove the note from Firebase
     .then(() => {
         document.getElementById('successMessage').style.display = 'block';  // Show success message
         setTimeout(() => {
@@ -81,4 +82,3 @@ function deleteNote(noteId) {
         console.error("Error deleting note: ", error);
     });
 }
-
