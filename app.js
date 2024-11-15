@@ -1,8 +1,8 @@
-// Import necessary Firebase modules (using Firebase v9 modular SDK)
+// Import necessary Firebase modules (Firebase v9+ SDK)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 
-// Firebase Configuration (replace with your own Firebase credentials)
+// Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
     authDomain: "django-eb349.firebaseapp.com",
@@ -13,10 +13,10 @@ const firebaseConfig = {
     appId: "1:271670409370:web:51498b4b417669173f8723"
 };
 
-// Initialize Firebase App
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Get a reference to the Firebase Realtime Database
+// Get the database reference
 const database = getDatabase(app);
 
 // DOM Elements
@@ -31,9 +31,9 @@ saveNoteBtn.addEventListener('click', () => {
     const userName = userNameInput.value.trim();
 
     if (noteText !== "" && userName !== "") {
-        const newNoteRef = ref(database, 'notes/' + Date.now()); // Create a reference for a new note
+        const newNoteRef = ref(database, 'notes/' + Date.now());  // Unique path for each note
 
-        // Save the note to Firebase Realtime Database using the new method
+        // Save the note data
         set(newNoteRef, {
             user: userName,
             note: noteText,
@@ -42,11 +42,11 @@ saveNoteBtn.addEventListener('click', () => {
         .then(() => {
             console.log("Note saved successfully!");
 
-            // Clear input fields
+            // Clear the input fields
             noteInput.value = "";
             userNameInput.value = "";
 
-            // Show success message
+            // Display success message
             successMessage.style.display = "block";
 
             // Hide success message after 3 seconds
@@ -55,7 +55,7 @@ saveNoteBtn.addEventListener('click', () => {
             }, 3000);
         })
         .catch((error) => {
-            console.error("Error saving note:", error);
+            console.error("Error saving note:", error);  // Log errors if any occur
         });
     }
 });
