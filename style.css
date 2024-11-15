@@ -67,30 +67,38 @@ button:hover {
 }
 
 /* Lollipop animation */
-.dancing-lollipop {
+.lollipop {
     width: 50px;
-    height: 50px;
-    background-image: url('path_to_your_lollipop_image.png'); /* Replace with actual path */
-    background-size: cover;
-    margin: 20px auto;
-    animation: dance 2s infinite;
+    height: 100px;
+    background-color: #FF69B4; /* Lollipop Color */
+    border-radius: 50%;
+    position: absolute;
+    top: 30%;
+    animation: dance 2s ease-in-out infinite;
+    margin-top: 30px;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+.lollipop::after {
+    content: "";
+    width: 5px;
+    height: 50px;
+    background-color: #FF69B4;
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Animation: Dancing Lollipop */
 @keyframes dance {
-    0% {
-        transform: translateY(0);
-    }
-    25% {
-        transform: translateY(-10px);
+    0%, 100% {
+        transform: translateY(0); /* Move up and down */
     }
     50% {
-        transform: translateY(0);
-    }
-    75% {
-        transform: translateY(-10px);
-    }
-    100% {
-        transform: translateY(0);
+        transform: translateY(-20px); /* Move up */
     }
 }
 
@@ -103,14 +111,9 @@ button:hover {
     .container {
         padding: 20px;
     }
+    #imagePreview img {
+        max-width: 300px;
+        margin-top: 10px;
+        border-radius: 8px;
+    }
 }
-
-#successMessage {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-#successMessage.show {
-    opacity: 1;
-}
-
