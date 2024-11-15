@@ -1,27 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
-<script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
-<script type="module" src="deleteNotes.js" defer></script>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Notes - Delete Notes</title>
+    <title>Delete Notes</title>
+    <!-- Add the Firebase SDK for app and database with type="module" -->
     <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
+    <!-- Include the JS file where you're using Firebase -->
     <script type="module" src="deleteNotes.js" defer></script>
-    <link rel="stylesheet" href="deleteNotes.css"> <!-- Link to the deleteNotes.css file -->
+    <link rel="stylesheet" href="deleteNotes.css">
 </head>
 <body>
-    <h1>Manage Notes - Delete Notes</h1>
-
-    <ul id="notesList"></ul> <!-- List to display notes -->
-
-    <!-- Success message -->
-    <div id="successMessage" style="display: none; color: green;">Note deleted successfully!</div>
+    <h1>Delete Notes</h1>
+    <ul id="notesList"></ul>  <!-- List of notes to be deleted -->
+    <div id="successMessage" style="display:none;">Note Deleted Successfully!</div>
 </body>
 </html>
+
 
 
