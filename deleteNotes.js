@@ -82,3 +82,4 @@ function deleteNote(noteId) {
         console.error("Error deleting note: ", error);
     });
 }
+
