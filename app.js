@@ -1,4 +1,4 @@
-// Initialize Firebase app
+// Firebase configuration and initialization
 const firebaseConfig = {
     apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
     authDomain: "django-eb349.firebaseapp.com",
@@ -9,18 +9,15 @@ const firebaseConfig = {
     appId: "1:271670409370:web:51498b4b417669173f8723"
 };
 
-// Initialize Firebase
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
-
+firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
+
 const noteInput = document.getElementById('noteInput');
 const userNameInput = document.getElementById('userNameInput');
 const saveNoteBtn = document.getElementById('saveNoteBtn');
 const successMessage = document.getElementById('successMessage');
 
-// Event listener to save the note
+// Function to save the note to Firebase
 saveNoteBtn.addEventListener('click', () => {
     const noteText = noteInput.value.trim();
     const userName = userNameInput.value.trim();
@@ -34,11 +31,17 @@ saveNoteBtn.addEventListener('click', () => {
             timestamp: Date.now()
         })
         .then(() => {
-            console.log("Note saved successfully!");
-            noteInput.value = "";
-            userNameInput.value = "";
-            successMessage.style.display = "block";
-            setTimeout(() => successMessage.style.display = "none", 3000);
+            successMessage.style.display = "block"; // Show success message
+            successMessage.textContent = "Note saved successfully!";
+            noteInput.value = "";                   // Clear input fields
+            userNameInput.value = "";               // Clear input fields
+
+            setTimeout(() => successMessage.style.display = "none", 3000); // Hide message after 3 seconds
         })
         .catch((error) => {
             console.error("Error saving note:", error);
+        });
+    } else {
+        alert("Please enter both name and note.");
+    }
+});
