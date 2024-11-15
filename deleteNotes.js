@@ -1,55 +1,61 @@
-/* Basic CSS Styling */
-body {
-    font-family: Arial, sans-serif, 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', 'Emoji', sans-serif;
-    padding: 20px;
-    background-color: #f4f4f4;
-    color: #333;
+// Firebase Configuration (Update with your own Firebase credentials)
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js';
+import { getDatabase, ref, get, remove } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js';
+
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_AUTH_DOMAIN",
+    databaseURL: "YOUR_DATABASE_URL",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_STORAGE_BUCKET",
+    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+window.onload = function() {
+    const notesList = document.getElementById('notesList');
+    notesList.innerHTML = '';  // Clear existing notes
+
+    const notesRef = ref(database, 'notes');
+    get(notesRef).then(snapshot => {
+        if (snapshot.exists()) {
+            const notesData = snapshot.val();
+            Object.keys(notesData).forEach(key => {
+                const note = notesData[key].note;
+                const user = notesData[key].user;
+
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div><strong>User: </strong>${user}</div>
+                    <div><strong>Note: </strong>${note}</div>
+                    <button class="delete-btn" onclick="deleteNote('${key}')">🗑️ Delete Note</button>
+                `;
+                notesList.appendChild(li);
+            });
+        } else {
+            notesList.innerHTML = '<li class="no-notes">No notes found. 📝</li>';
+        }
+    }).catch(error => {
+        console.error("Error fetching notes: ", error);
+    });
+};
+
+// Delete a note from Firebase
+function deleteNote(noteId) {
+    const noteRef = ref(database, 'notes/' + noteId);
+    remove(noteRef)
+        .then(() => {
+            alert('Note deleted successfully! 🗑️');
+            location.reload(); // Reload the page to update the list
+        })
+        .catch(error => {
+            console.error("Error deleting note: ", error);
+        });
 }
 
-h1 {
-    text-align: center;
-    color: #4CAF50;
-}
-
-/* Notes List Styling */
-#notesList {
-    list-style-type: none;
-    padding: 0;
-}
-
-#notesList li {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Delete Button Styling */
-.delete-btn {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 0.9em;
-    border-radius: 5px;
-}
-
-.delete-btn:hover {
-    background-color: #d32f2f;
-}
-
-/* Styling for "No notes found" */
-.no-notes {
-    background-color: #f0f0f0;
-    color: #888;
-    text-align: center;
-    padding: 15px;
-    font-size: 1.1em;
-}
 
 
 
