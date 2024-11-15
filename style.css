@@ -1,122 +1,45 @@
-/* Basic Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #000; /* Black background */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #fff;
-    background-image: url('https://source.unsplash.com/1600x900/?batman'); /* Random batman image */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    transition: background-image 1s ease-in-out;
-}
-
-/* Container */
-.container {
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-    max-width: 500px;
-    width: 100%;
-    text-align: center;
-    border: 2px solid #4CAF50; /* Green border for Batman theme */
-    animation: fadeIn 2s ease-out; /* Smooth fade-in effect */
-}
-
-/* Header */
-h1 {
-    color: #FFD700; /* Golden color for Batman theme */
-    font-size: 3em;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    animation: textBlink 1.5s infinite alternate; /* Blink effect */
-}
-
-/* Input Fields */
-input, textarea {
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    border: 1px solid #FFD700;
-    border-radius: 5px;
-    font-size: 1.1em;
-    background-color: #333;
-    color: #fff;
-    transition: all 0.3s ease;
-}
-
-/* Focus Effect */
-input:focus, textarea:focus {
-    border-color: #4CAF50;
-    outline: none;
-    background-color: #444;
-}
-
-/* Save Button */
+/* Basic Button Styling */
 button {
     width: 100%;
     padding: 15px;
-    background-color: #4CAF50;
+    background: linear-gradient(45deg, #4CAF50, #81C784); /* Default gradient */
     color: white;
-    font-size: 1.5em;
+    font-size: 1.2em;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    animation: bounce 1s infinite alternate; /* Button bouncing animation */
+    position: relative;
 }
 
+/* Button Hover Effect */
 button:hover {
-    background-color: #45a049;
+    background: linear-gradient(45deg, #45a049, #66bb6a); /* Slightly darker gradient on hover */
 }
 
-/* Success Message */
+/* Gradient animation on button click */
+@keyframes gradientAnimation {
+    0% {
+        background: linear-gradient(45deg, #4CAF50, #81C784); /* Initial gradient */
+    }
+    50% {
+        background: linear-gradient(45deg, #FF9800, #FFC107); /* Orange gradient on click */
+    }
+    100% {
+        background: linear-gradient(45deg, #4CAF50, #81C784); /* Back to original gradient */
+    }
+}
+
+/* Button active state (when clicked) */
+button:active {
+    animation: gradientAnimation 0.5s ease forwards; /* Apply the gradient animation */
+}
+
+/* Success Message Styling */
 #successMessage {
-    color: #FFD700; /* Golden color */
-    font-size: 1.2em;
+    color: #ffcc00; /* Batman yellow */
+    font-size: 18px;
     margin-top: 20px;
     display: none;
-    animation: fadeIn 2s ease-out; /* Fade-in effect for success message */
-}
-
-/* Animations */
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-@keyframes textBlink {
-    0% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
-
-@keyframes bounce {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
-}
-
-/* Responsive design for smaller screens */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2em;
-    }
-
-    .container {
-        padding: 20px;
-    }
-
-    input, textarea {
-        font-size: 1em;
-    }
-
-    button {
-        font-size: 1.2em;
-    }
+    text-align: center;
 }
