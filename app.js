@@ -26,6 +26,7 @@ const saveNoteBtn = document.getElementById('saveNoteBtn');
 const imageUploadInput = document.getElementById('imageUploadInput');
 const uploadImageBtn = document.getElementById('uploadImageBtn');
 const imagePreview = document.getElementById('imagePreview');
+const imageSuccessMessage = document.getElementById('imageSuccessMessage');
 
 // Save note to Firebase
 saveNoteBtn.addEventListener('click', function() {
@@ -33,14 +34,14 @@ saveNoteBtn.addEventListener('click', function() {
     const noteText = noteInput.value;
 
     if (userName && noteText) {
-        // Create a reference to the notes node
         const newNoteRef = ref(database, 'notes/' + Date.now());
 
-        // Save the note to Firebase Database
+        // Save the note to Firebase Database, including the image URL if exists
         set(newNoteRef, {
             user: userName,
             note: noteText,
-            timestamp: Date.now()
+            timestamp: Date.now(),
+            imageUrl: uploadedImageURL || "" // Save image URL or empty if no image uploaded
         }).then(() => {
             alert("Note saved successfully!");
         }).catch((error) => {
@@ -69,6 +70,12 @@ uploadImageBtn.addEventListener('click', function() {
 
                 // Preview the uploaded image
                 imagePreview.innerHTML = `<img src="${downloadURL}" alt="Uploaded Image" style="max-width: 300px;">`;
+
+                // Show success message after upload
+                imageSuccessMessage.style.display = 'block';
+                setTimeout(() => {
+                    imageSuccessMessage.style.display = 'none';
+                }, 3000); // Hide the pop-up after 3 seconds
             }).catch((error) => {
                 console.error("Error getting image URL:", error);
             });
