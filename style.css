@@ -9,12 +9,13 @@ body {
     align-items: center;
     min-height: 100vh;
     color: #333;
-    background-image: url('https://your-random-batman-background-image-link'); /* Add random batman background image link */
+    background-image: url('https://source.unsplash.com/1600x900/?batman');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
+    font-size: 1.1em;
 }
 
-/* Container for content */
 .container {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 30px;
@@ -25,10 +26,9 @@ body {
     text-align: center;
 }
 
-/* Title */
 h1 {
-    color: #f1c40f;  /* Batman yellow */
-    font-size: 2.5em;
+    color: #F1C40F; /* Batman Yellow */
+    font-size: 3em;
     margin-bottom: 20px;
 }
 
@@ -46,7 +46,7 @@ input, textarea {
 
 /* Focus State */
 input:focus, textarea:focus {
-    border-color: #f1c40f;
+    border-color: #F1C40F;
     outline: none;
 }
 
@@ -54,57 +54,26 @@ input:focus, textarea:focus {
 button {
     width: 100%;
     padding: 15px;
-    background: linear-gradient(45deg, #4CAF50, #81C784); /* Default gradient */
+    background-color: #F1C40F;
     color: white;
     font-size: 1.2em;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    position: relative;
 }
 
 /* Button Hover Effect */
 button:hover {
-    background: linear-gradient(45deg, #45a049, #66bb6a); /* Slightly darker gradient on hover */
-}
-
-/* Gradient animation on button click */
-@keyframes gradientAnimation {
-    0% {
-        background: linear-gradient(45deg, #4CAF50, #81C784); /* Initial gradient */
-    }
-    50% {
-        background: linear-gradient(45deg, #FF9800, #FFC107); /* Orange gradient on click */
-    }
-    100% {
-        background: linear-gradient(45deg, #4CAF50, #81C784); /* Back to original gradient */
-    }
-}
-
-/* Button active state (when clicked) */
-button:active {
-    animation: gradientAnimation 0.5s ease forwards; /* Apply the gradient animation */
+    background-color: #e1b10f;
 }
 
 /* Success message styling */
 #successMessage {
-    color: #ffcc00; /* Batman yellow */
+    color: #27ae60;
     font-size: 18px;
     margin-top: 20px;
     display: none;
-    text-align: center;
-}
-
-/* Responsive design for small screens */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2em;
-    }
-
-    .container {
-        padding: 20px;
-    }
 }
 
 /* Notes List Styling for View Notes */
@@ -154,4 +123,15 @@ button:active {
     background-color: #f0f0f0;
     color: #888;
     text-align: center;
+}
+
+/* Responsive design for small screens */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .container {
+        padding: 20px;
+    }
 }
