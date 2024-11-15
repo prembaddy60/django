@@ -28,6 +28,8 @@ saveNoteBtn.addEventListener('click', function() {
     const userName = userNameInput.value;
     const noteText = noteInput.value;
 
+    console.log("Save button clicked");  // Debugging log
+
     if (userName && noteText) {
         const newNoteRef = ref(database, 'notes/' + Date.now());
 
@@ -37,12 +39,12 @@ saveNoteBtn.addEventListener('click', function() {
             note: noteText,
             timestamp: Date.now()
         }).then(() => {
-            // Display success message
-            successMessage.style.display = 'block';
+            console.log("Note saved successfully");  // Debugging log
+            successMessage.style.display = 'block';  // Show success message
 
             // Hide success message after 3 seconds
             setTimeout(() => {
-                successMessage.style.display = 'none';
+                successMessage.style.display = 'none';  // Hide message after 3 seconds
             }, 3000);
 
             // Reset the input fields
