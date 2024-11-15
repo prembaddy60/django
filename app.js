@@ -1,4 +1,22 @@
-// Import Firebase and Firebase Database from the Firebase SDK
+// Random Batman Background
+const backgrounds = [
+    'https://source.unsplash.com/1600x900/?batman',
+    'https://source.unsplash.com/1600x900/?batman,night',
+    'https://source.unsplash.com/1600x900/?batman,city',
+    'https://source.unsplash.com/1600x900/?batman,mask'
+];
+
+// Function to change background on page load
+function changeBackground() {
+    const randomIndex = Math.floor(Math.random() * backgrounds.length);
+    document.body.style.backgroundImage = `url(${backgrounds[randomIndex]})`;
+}
+
+window.onload = function() {
+    changeBackground();
+};
+
+// Firebase and note saving functionality
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 
@@ -28,8 +46,6 @@ saveNoteBtn.addEventListener('click', function() {
     const userName = userNameInput.value;
     const noteText = noteInput.value;
 
-    console.log("Save button clicked");  // Debugging log
-
     if (userName && noteText) {
         const newNoteRef = ref(database, 'notes/' + Date.now());
 
@@ -39,12 +55,12 @@ saveNoteBtn.addEventListener('click', function() {
             note: noteText,
             timestamp: Date.now()
         }).then(() => {
-            console.log("Note saved successfully");  // Debugging log
-            successMessage.style.display = 'block';  // Show success message
+            // Display success message
+            successMessage.style.display = 'block';
 
             // Hide success message after 3 seconds
             setTimeout(() => {
-                successMessage.style.display = 'none';  // Hide message after 3 seconds
+                successMessage.style.display = 'none';
             }, 3000);
 
             // Reset the input fields
