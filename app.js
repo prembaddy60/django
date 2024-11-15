@@ -37,16 +37,15 @@ saveNoteBtn.addEventListener('click', function() {
             note: noteText,
             timestamp: Date.now()
         }).then(() => {
-            // Show success message below the Save Note button
+            // Display success message
             successMessage.style.display = 'block';
-            successMessage.innerText = "Note saved successfully!";
 
             // Hide success message after 3 seconds
             setTimeout(() => {
                 successMessage.style.display = 'none';
             }, 3000);
 
-            // Reset input fields
+            // Reset the input fields
             userNameInput.value = '';
             noteInput.value = '';
         }).catch((error) => {
