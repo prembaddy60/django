@@ -35,9 +35,11 @@ window.onload = function() {
                 const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
                 const li = document.createElement('li');
-                li.innerHTML = `<div class="note-user">${user}</div>
-                               <div class="note-timestamp">${formattedDate}</div>
-                               <div class="note-text">${note}</div>`;
+                li.innerHTML = `
+                    <div class="note-user">${user}</div>
+                    <div class="note-timestamp">${formattedDate}</div>
+                    <div class="note-text">${note}</div>
+                `;
                 notesList.appendChild(li);
             });
         } else {
@@ -50,3 +52,4 @@ window.onload = function() {
         console.error("Error fetching notes:", error);
     });
 };
+
