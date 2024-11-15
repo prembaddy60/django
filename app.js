@@ -1,7 +1,6 @@
 // Import Firebase and Firebase Database from the Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js";
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -17,72 +16,43 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-const storage = getStorage(app);
 
 // Elements
 const userNameInput = document.getElementById('userNameInput');
 const noteInput = document.getElementById('noteInput');
 const saveNoteBtn = document.getElementById('saveNoteBtn');
-const imageUploadInput = document.getElementById('imageUploadInput');
-const uploadImageBtn = document.getElementById('uploadImageBtn');
-const imagePreview = document.getElementById('imagePreview');
-const imageSuccessMessage = document.getElementById('imageSuccessMessage');
+const successMessage = document.getElementById('successMessage');
 
 // Save note to Firebase
 saveNoteBtn.addEventListener('click', function() {
-    const userName = userNameInput.value;
-    const noteText = noteInput.value;
+    const userName = userNameInput.value.trim();
+    const noteText = noteInput.value.trim();
 
     if (userName && noteText) {
         const newNoteRef = ref(database, 'notes/' + Date.now());
 
-        // Save the note to Firebase Database, including the image URL if exists
+        // Save the note to Firebase Database
         set(newNoteRef, {
             user: userName,
             note: noteText,
-            timestamp: Date.now(),
-            imageUrl: uploadedImageURL || "" // Save image URL or empty if no image uploaded
+            timestamp: Date.now()
         }).then(() => {
-            alert("Note saved successfully!");
+            // Show success message
+            successMessage.style.display = 'block';
+            successMessage.textContent = "Note saved successfully!";
+            
+            // Clear input fields
+            userNameInput.value = "";
+            noteInput.value = "";
+
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
         }).catch((error) => {
             console.error("Error saving note:", error);
         });
     } else {
         alert("Please provide your name and a note.");
-    }
-});
-
-// Image upload functionality
-let uploadedImageURL = ""; // Variable to store the uploaded image URL
-
-uploadImageBtn.addEventListener('click', function() {
-    const file = imageUploadInput.files[0];
-    if (file) {
-        const storageReference = storageRef(storage, 'images/' + file.name);
-        
-        // Upload the image to Firebase Storage
-        uploadBytes(storageReference, file).then((snapshot) => {
-            console.log("Image uploaded successfully!");
-
-            // Get the image URL after upload
-            getDownloadURL(snapshot.ref).then((downloadURL) => {
-                uploadedImageURL = downloadURL;
-
-                // Preview the uploaded image
-                imagePreview.innerHTML = `<img src="${downloadURL}" alt="Uploaded Image" style="max-width: 300px;">`;
-
-                // Show success message after upload
-                imageSuccessMessage.style.display = 'block';
-                setTimeout(() => {
-                    imageSuccessMessage.style.display = 'none';
-                }, 3000); // Hide the pop-up after 3 seconds
-            }).catch((error) => {
-                console.error("Error getting image URL:", error);
-            });
-        }).catch((error) => {
-            console.error("Error uploading image:", error);
-        });
-    } else {
-        alert("Please select an image to upload.");
     }
 });
