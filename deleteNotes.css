@@ -1,4 +1,4 @@
-/* Basic Styling */
+/* Basic CSS Styling */
 body {
     font-family: Arial, sans-serif, 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', 'Emoji', sans-serif;
     padding: 20px;
@@ -26,6 +26,7 @@ h1 {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Delete Button Styling */
 .delete-btn {
     background-color: #f44336;
     color: white;
@@ -41,6 +42,7 @@ h1 {
     background-color: #d32f2f;
 }
 
+/* Styling for "No notes found" */
 .no-notes {
     background-color: #f0f0f0;
     color: #888;
@@ -48,6 +50,7 @@ h1 {
     padding: 15px;
     font-size: 1.1em;
 }
+
 
 
 
