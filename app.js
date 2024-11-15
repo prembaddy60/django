@@ -25,8 +25,8 @@ const successMessage = document.getElementById('successMessage');
 
 // Save note to Firebase
 saveNoteBtn.addEventListener('click', function() {
-    const userName = userNameInput.value.trim();  // Trim to remove leading/trailing spaces
-    const noteText = noteInput.value.trim();      // Trim to remove leading/trailing spaces
+    const userName = userNameInput.value;
+    const noteText = noteInput.value;
 
     if (userName && noteText) {
         const newNoteRef = ref(database, 'notes/' + Date.now());
@@ -37,36 +37,21 @@ saveNoteBtn.addEventListener('click', function() {
             note: noteText,
             timestamp: Date.now()
         }).then(() => {
-            // Display success message with fade-in effect
-            successMessage.classList.add('show');
+            // Display success message
+            successMessage.style.display = 'block';
 
             // Hide success message after 3 seconds
             setTimeout(() => {
-                successMessage.classList.remove('show');
+                successMessage.style.display = 'none';
             }, 3000);
 
             // Reset the input fields
             userNameInput.value = '';
             noteInput.value = '';
         }).catch((error) => {
-            // Display error message to the user
-            alert("There was an error saving your note. Please try again.");
             console.error("Error saving note:", error);
         });
     } else {
-        // Highlight the empty field
-        if (!userName) {
-            userNameInput.style.borderColor = 'red';  // Red border for missing name
-        } else {
-            userNameInput.style.borderColor = '';
-        }
-
-        if (!noteText) {
-            noteInput.style.borderColor = 'red';      // Red border for missing note
-        } else {
-            noteInput.style.borderColor = '';
-        }
-
-        alert("Please provide both your name and a note.");
+        alert("Please provide your name and a note.");
     }
 });
