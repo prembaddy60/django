@@ -12,13 +12,15 @@ const firebaseConfig = {
 // Initialize Firebase
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
+} else {
+    firebase.app();
 }
 
 const database = firebase.database();
 
 window.onload = function() {
     const notesList = document.getElementById('notesList');
-    notesList.innerHTML = '';  // Clear the existing notes
+    notesList.innerHTML = '';  // Clear existing notes
 
     const notesRef = database.ref('notes');
     
@@ -50,3 +52,4 @@ window.onload = function() {
         }
     });
 };
+
