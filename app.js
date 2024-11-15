@@ -1,19 +1,19 @@
-// Firebase Configuration (same as your app.js)
+// Firebase Configuration (Replace these values with your own Firebase credentials)
 const firebaseConfig = {
-    apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
-    authDomain: "django-eb349.firebaseapp.com",
-    databaseURL: "https://django-eb349-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "django-eb349",
-    storageBucket: "django-eb349.appspot.com",
-    messagingSenderId: "271670409370",
-    appId: "1:271670409370:web:51498b4b417669173f8723"
+    apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",   // Your Firebase API Key
+    authDomain: "django-eb349.firebaseapp.com",        // Your Firebase Auth Domain
+    databaseURL: "https://django-eb349-default-rtdb.asia-southeast1.firebasedatabase.app",  // Your Firebase Database URL
+    projectId: "django-eb349",                         // Your Firebase Project ID
+    storageBucket: "django-eb349.appspot.com",         // Your Firebase Storage Bucket
+    messagingSenderId: "271670409370",                 // Your Messaging Sender ID
+    appId: "1:271670409370:web:51498b4b417669173f8723" // Your App ID
 };
 
 // Initialize Firebase
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 } else {
-    firebase.app();
+    firebase.app(); // Use the existing Firebase app
 }
 
 const database = firebase.database();
@@ -38,7 +38,6 @@ saveNoteBtn.addEventListener('click', () => {
             timestamp: Date.now()
         }).then(() => {
             console.log("Note saved successfully!");
-
             // Clear the note input field and user name field
             noteInput.value = "";
             userNameInput.value = "";
@@ -53,7 +52,5 @@ saveNoteBtn.addEventListener('click', () => {
         }).catch((error) => {
             console.error("Error saving note:", error);  // Log errors if any occur
         });
-    } else {
-        alert("Please enter a name and a note before saving!");
     }
 });
