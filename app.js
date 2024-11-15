@@ -1,22 +1,4 @@
-// Random Batman Background
-const backgrounds = [
-    'https://source.unsplash.com/1600x900/?batman',
-    'https://source.unsplash.com/1600x900/?batman,night',
-    'https://source.unsplash.com/1600x900/?batman,city',
-    'https://source.unsplash.com/1600x900/?batman,mask'
-];
-
-// Function to change background on page load
-function changeBackground() {
-    const randomIndex = Math.floor(Math.random() * backgrounds.length);
-    document.body.style.backgroundImage = `url(${backgrounds[randomIndex]})`;
-}
-
-window.onload = function() {
-    changeBackground();
-};
-
-// Firebase and note saving functionality
+// Import Firebase and Firebase Database from the Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 
@@ -55,6 +37,9 @@ saveNoteBtn.addEventListener('click', function() {
             note: noteText,
             timestamp: Date.now()
         }).then(() => {
+            // Trigger animation on the save button after saving
+            saveNoteBtn.classList.add('clicked');  // Add class to trigger animation
+
             // Display success message
             successMessage.style.display = 'block';
 
@@ -66,6 +51,11 @@ saveNoteBtn.addEventListener('click', function() {
             // Reset the input fields
             userNameInput.value = '';
             noteInput.value = '';
+
+            // Remove animation class after animation ends
+            setTimeout(() => {
+                saveNoteBtn.classList.remove('clicked');
+            }, 500);  // Match this time with the animation duration
         }).catch((error) => {
             console.error("Error saving note:", error);
         });
