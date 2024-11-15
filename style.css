@@ -1,113 +1,75 @@
-/* Basic CSS Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #1c1c1c;  /* Dark theme */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #f1f1f1;
-    text-align: center;
-    animation: fadeIn 2s ease-out; /* Fade in animation for body */
+// Random Batman Background
+const backgrounds = [
+    'https://source.unsplash.com/1600x900/?batman',
+    'https://source.unsplash.com/1600x900/?batman,night',
+    'https://source.unsplash.com/1600x900/?batman,city',
+    'https://source.unsplash.com/1600x900/?batman,mask'
+];
+
+// Function to change background on page load
+function changeBackground() {
+    const randomIndex = Math.floor(Math.random() * backgrounds.length);
+    document.body.style.backgroundImage = `url(${backgrounds[randomIndex]})`;
 }
 
-/* Container for the notes */
-.container {
-    background-color: #2d2d2d; /* Dark container */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
-    max-width: 500px;
-    width: 100%;
-}
+window.onload = function() {
+    changeBackground();
+};
 
-/* Heading with a Batman font style */
-h1 {
-    font-family: 'Bangers', sans-serif; /* Batman-style font */
-    color: #f0e68c; /* Yellow color resembling Batman theme */
-    font-size: 3em;
-    margin-bottom: 20px;
-    text-shadow: 3px 3px 10px #333;
-}
+// Firebase and note saving functionality
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 
-/* Input and textarea styles */
-input, textarea {
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    border: 1px solid #333;
-    border-radius: 5px;
-    font-size: 1.1em;
-    background-color: #444;
-    color: #f1f1f1;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-}
+// Firebase Configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
+    authDomain: "django-eb349.firebaseapp.com",
+    databaseURL: "https://django-eb349-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "django-eb349",
+    storageBucket: "django-eb349.appspot.com",
+    messagingSenderId: "271670409370",
+    appId: "1:271670409370:web:51498b4b417669173f8723"
+};
 
-/* Focus effect on input fields */
-input:focus, textarea:focus {
-    background-color: #555; 
-    border-color: #f0e68c;
-    outline: none;
-}
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
-/* Button styling */
-button {
-    width: 100%;
-    padding: 15px;
-    background-color: #f0e68c;
-    color: #1c1c1c;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.2s, background-color 0.3s;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
+// Elements
+const userNameInput = document.getElementById('userNameInput');
+const noteInput = document.getElementById('noteInput');
+const saveNoteBtn = document.getElementById('saveNoteBtn');
+const successMessage = document.getElementById('successMessage');
 
-/* Button hover effect */
-button:hover {
-    background-color: #ffcc00;
-    transform: scale(1.05); /* Slight scaling effect on hover */
-}
+// Save note to Firebase
+saveNoteBtn.addEventListener('click', function() {
+    const userName = userNameInput.value;
+    const noteText = noteInput.value;
 
-/* Success message styling */
-#successMessage {
-    color: #f0e68c;
-    font-size: 1.2em;
-    margin-top: 20px;
-    display: none;
-    animation: bounceIn 1s ease; /* Bounce-in effect */
-}
+    if (userName && noteText) {
+        const newNoteRef = ref(database, 'notes/' + Date.now());
 
-/* Fade-in animation for body */
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
+        // Save the note to Firebase Database
+        set(newNoteRef, {
+            user: userName,
+            note: noteText,
+            timestamp: Date.now()
+        }).then(() => {
+            // Display success message
+            successMessage.style.display = 'block';
 
-/* Bounce-in effect for success message */
-@keyframes bounceIn {
-    0% {
-        transform: scale(0);
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+
+            // Reset the input fields
+            userNameInput.value = '';
+            noteInput.value = '';
+        }).catch((error) => {
+            console.error("Error saving note:", error);
+        });
+    } else {
+        alert("Please provide your name and a note.");
     }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* Responsive design */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2.5em;
-    }
-
-    .container {
-        padding: 20px;
-    }
-}
+});
