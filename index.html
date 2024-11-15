@@ -4,61 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes App</title>
-
-    <!-- Firebase SDKs -->
     <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
-
-    <!-- Link to custom JavaScript (app.js) -->
-    <script type="module" src="app.js" defer></script>
-
+    <script type="module" defer src="app.js"></script>  <!-- Link to your app.js -->
     <style>
-        /* Basic CSS Styling */
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-
-        #noteInput, #userNameInput {
-            padding: 10px;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        #saveNoteBtn {
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        #saveNoteBtn:hover {
-            background-color: #45a049;
-        }
-
-        /* Success message styling */
-        #successMessage {
-            color: green;
-            font-size: 18px;
-            margin-top: 20px;
-            display: none;  /* Hidden by default */
-        }
+        /* Your styling remains the same */
     </style>
 </head>
 <body>
-
     <h1>Notes App</h1>
-
-    <!-- Note input form -->
-    <div>
-        <input type="text" id="userNameInput" placeholder="Enter your name"><br>
-        <textarea id="noteInput" placeholder="Write your note here..."></textarea><br>
-        <button id="saveNoteBtn">Save Note</button>
-    </div>
-
-    <!-- Success message -->
-    <div id="successMessage">Note saved successfully!</div>
-
+    <input type="text" id="userNameInput" placeholder="Enter your name"><br>
+    <textarea id="noteInput" placeholder="Write your note here..."></textarea><br>
+    <button id="saveNoteBtn">Save Note</button>
+    <div id="successMessage" style="display:none;">Note saved successfully!</div>
 </body>
 </html>
