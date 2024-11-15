@@ -1,4 +1,4 @@
-// Import necessary Firebase modules
+// Import necessary Firebase modules using the modular SDK format
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js';
 import { getDatabase, ref, get, remove } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js';
 
@@ -82,4 +82,5 @@ function deleteNote(noteId) {
         console.error("Error deleting note: ", error);
     });
 }
+
 
