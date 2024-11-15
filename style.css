@@ -91,5 +91,13 @@ button:hover {
     border-radius: 8px;
     display: none;
 }
+#successMessage {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#successMessage.show {
+    opacity: 1;
+}
 
 }
