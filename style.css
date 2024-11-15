@@ -1,4 +1,56 @@
-/* Basic Button Styling */
+/* Basic CSS Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+    background-image: url('https://your-random-batman-background-image-link'); /* Add random batman background image link */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Container for content */
+.container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Title */
+h1 {
+    color: #f1c40f;  /* Batman yellow */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* Input and Textarea Fields */
+input, textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.1em;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+/* Focus State */
+input:focus, textarea:focus {
+    border-color: #f1c40f;
+    outline: none;
+}
+
+/* Button Styling */
 button {
     width: 100%;
     padding: 15px;
@@ -35,11 +87,71 @@ button:active {
     animation: gradientAnimation 0.5s ease forwards; /* Apply the gradient animation */
 }
 
-/* Success Message Styling */
+/* Success message styling */
 #successMessage {
     color: #ffcc00; /* Batman yellow */
     font-size: 18px;
     margin-top: 20px;
     display: none;
+    text-align: center;
+}
+
+/* Responsive design for small screens */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .container {
+        padding: 20px;
+    }
+}
+
+/* Notes List Styling for View Notes */
+#notesList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#notesList li {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+#notesList li:hover {
+    transform: translateY(-5px);
+}
+
+.note-user {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.note-timestamp {
+    font-size: 0.85em;
+    color: #777;
+    margin-top: -5px;
+}
+
+.note-text {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    font-size: 1.1em;
+    color: #444;
+}
+
+/* No Notes Found Styling */
+#notesList li.no-notes {
+    background-color: #f0f0f0;
+    color: #888;
     text-align: center;
 }
