@@ -1,4 +1,4 @@
-// Import necessary Firebase modules
+// Import necessary Firebase modules (using Firebase v9 modular SDK)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 
@@ -15,7 +15,9 @@ const firebaseConfig = {
 
 // Initialize Firebase App
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app); // Get reference to Firebase Realtime Database
+
+// Get a reference to the Firebase Realtime Database
+const database = getDatabase(app);
 
 // DOM Elements
 const noteInput = document.getElementById('noteInput');
@@ -31,7 +33,7 @@ saveNoteBtn.addEventListener('click', () => {
     if (noteText !== "" && userName !== "") {
         const newNoteRef = ref(database, 'notes/' + Date.now()); // Create a reference for a new note
 
-        // Save the note to Firebase Realtime Database
+        // Save the note to Firebase Realtime Database using the new method
         set(newNoteRef, {
             user: userName,
             note: noteText,
