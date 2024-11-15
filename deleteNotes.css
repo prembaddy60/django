@@ -52,16 +52,18 @@ h1 {
     color: #444;
 }
 
-button.deleteNoteBtn {
+/* Button Styling */
+.deleteNoteBtn {
     background-color: #f44336;
     color: white;
-    padding: 5px 10px;
     border: none;
-    border-radius: 5px;
+    padding: 10px;
     cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.9em;
 }
 
-button.deleteNoteBtn:hover {
+.deleteNoteBtn:hover {
     background-color: #d32f2f;
 }
 
@@ -70,7 +72,7 @@ button.deleteNoteBtn:hover {
     color: green;
     font-size: 18px;
     margin-top: 20px;
-    text-align: center;
+    display: none;
 }
 
 /* No Notes Found Styling */
@@ -79,4 +81,5 @@ button.deleteNoteBtn:hover {
     color: #888;
     text-align: center;
 }
+
 
