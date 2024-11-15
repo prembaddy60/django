@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 
+// Your Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
     authDomain: "django-eb349.firebaseapp.com",
@@ -18,7 +19,7 @@ const database = getDatabase(app);
 // Load notes from Firebase
 window.onload = function() {
     const notesList = document.getElementById('notesList');
-    notesList.innerHTML = '';  // Clear the existing notes
+    notesList.innerHTML = '';  // Clear existing notes
 
     const notesRef = ref(database, 'notes');
     get(notesRef).then((snapshot) => {
@@ -29,7 +30,6 @@ window.onload = function() {
                 const user = notesData[key].user;
                 const timestamp = notesData[key].timestamp;
 
-                // Format date from timestamp (optional)
                 const date = new Date(timestamp);
                 const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
@@ -37,10 +37,10 @@ window.onload = function() {
                 li.innerHTML = `<div class="note-user">${user}</div>
                                <div class="note-timestamp">${formattedDate}</div>
                                <div class="note-text">${note}</div>`;
-                notesList.appendChild(li);  // Append each note to the list
+                notesList.appendChild(li);
             });
         } else {
-            // Display a message if no notes are found
+            // No notes found
             const noNotesMessage = document.createElement('li');
             noNotesMessage.classList.add('no-notes');
             noNotesMessage.textContent = 'No notes available.';
@@ -50,6 +50,7 @@ window.onload = function() {
         console.error("Error retrieving notes:", error);
     });
 };
+
 
 
 
