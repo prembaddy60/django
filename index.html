@@ -8,6 +8,7 @@
     <!-- Firebase SDKs -->
     <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js"></script>
 
     <!-- Link to custom JavaScript (app.js) -->
     <script type="module" defer src="app.js"></script>
@@ -25,6 +26,13 @@
             <input type="text" id="userNameInput" placeholder="Enter your name"><br>
             <textarea id="noteInput" placeholder="Write your note here..."></textarea><br>
             <button id="saveNoteBtn">Save Note</button>
+        </div>
+
+        <!-- Image upload section -->
+        <div>
+            <input type="file" id="imageUploadInput" accept="image/*"><br>
+            <button id="uploadImageBtn">Upload Image</button><br>
+            <div id="imagePreview"></div> <!-- To display uploaded image -->
         </div>
 
         <!-- Success message -->
