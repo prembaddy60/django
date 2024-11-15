@@ -75,4 +75,9 @@ button:hover {
     .container {
         padding: 20px;
     }
+    #imagePreview img {
+    max-width: 300px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
 }
