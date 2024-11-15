@@ -4,18 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes App</title>
+
+    <!-- Firebase SDKs -->
     <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
-    <script type="module" defer src="app.js"></script>  <!-- Link to your app.js -->
-    <style>
-        /* Your styling remains the same */
-    </style>
+
+    <!-- Link to custom JavaScript (app.js) -->
+    <script type="module" defer src="app.js"></script>
+
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Notes App</h1>
-    <input type="text" id="userNameInput" placeholder="Enter your name"><br>
-    <textarea id="noteInput" placeholder="Write your note here..."></textarea><br>
-    <button id="saveNoteBtn">Save Note</button>
-    <div id="successMessage" style="display:none;">Note saved successfully!</div>
+
+    <div class="container">
+        <h1>Notes App</h1>
+
+        <!-- Note input form -->
+        <div>
+            <input type="text" id="userNameInput" placeholder="Enter your name"><br>
+            <textarea id="noteInput" placeholder="Write your note here..."></textarea><br>
+            <button id="saveNoteBtn">Save Note</button>
+        </div>
+
+        <!-- Success message -->
+        <div id="successMessage">Note saved successfully!</div>
+    </div>
+
 </body>
 </html>
