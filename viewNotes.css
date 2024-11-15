@@ -1,18 +1,18 @@
 /* Basic CSS Styling for View Notes */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    background-color: #101820; /* Batman-themed background color */
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
-    color: #333;
+    color: #f4f4f9; /* Light text for contrast */
 }
 
 .container {
-    background-color: #ffffff;
+    background-color: #2d2d2d; /* Dark background for contrast */
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -21,7 +21,7 @@ body {
 }
 
 h1 {
-    color: #4CAF50;
+    color: #ffcc00; /* Batman yellow color */
     font-size: 2.5em;
     text-align: center;
     margin-bottom: 30px;
@@ -36,11 +36,12 @@ h1 {
 #notesList li {
     margin-bottom: 20px;
     padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background-color: #333333; /* Dark background for notes */
+    border: 1px solid #444;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease;
+    color: #f4f4f9; /* Light text for contrast */
 }
 
 #notesList li:hover {
@@ -50,7 +51,7 @@ h1 {
 .note-user {
     font-weight: bold;
     font-size: 1.2em;
-    color: #333;
+    color: #ffcc00; /* Batman yellow for user */
 }
 
 .note-timestamp {
@@ -62,18 +63,19 @@ h1 {
 .note-text {
     margin-top: 10px;
     padding: 10px;
-    background: #f9f9f9;
+    background: #444; /* Slightly lighter background for text */
     border-radius: 5px;
     font-size: 1.1em;
-    color: #444;
+    color: #f4f4f9; /* Light text for readability */
 }
 
 /* Success message styling */
 #successMessage {
-    color: green;
+    color: #ffcc00; /* Batman yellow */
     font-size: 18px;
     margin-top: 20px;
     display: none;
+    text-align: center;
 }
 
 /* No Notes Found Styling */
