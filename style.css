@@ -1,78 +1,45 @@
 /* Basic CSS Styling */
 body {
     font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #f4f4f4;
-    color: #333;
+    margin: 0;
+    padding: 0;
+    background: url('https://wallpapersok.com/images/high/dc-comics-minimalist-batman-art-7v7sgjlhrkk21fem.webp') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
     text-align: center;
-    color: #4CAF50;
+    font-family: 'BatmanForeverAlternate', sans-serif;
+    font-size: 3em;
+    color: #FFD700; /* Gold color */
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
 }
 
-/* Notes List Styling */
-#notesList {
-    list-style-type: none;
-    padding: 0;
-}
-
-#notesList li {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-}
-
-#notesList li:hover {
-    transform: translateY(-5px);
-}
-
-.note-user {
-    font-weight: bold;
-    font-size: 1.1em;
-    color: #333;
-}
-
-.note-timestamp {
-    font-size: 0.85em;
-    color: #777;
-    margin-top: -5px;
-}
-
-.note-text {
-    margin-top: 10px;
-    padding: 10px;
-    background: #f9f9f9;
-    border-radius: 5px;
-    font-size: 1em;
-    color: #444;
-}
-
-.delete-btn {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 0.9em;
-    border-radius: 5px;
-}
-
-.delete-btn:hover {
-    background-color: #d32f2f;
-}
-
-.no-notes {
-    background-color: #f0f0f0;
-    color: #888;
+/* Note input form styling */
+.container {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
     text-align: center;
-    padding: 15px;
+    width: 350px;
+}
+
+input, textarea, button {
+    background-color: #333;
+    border: 1px solid #555;
+    color: #fff;
+    border-radius: 5px;
     font-size: 1.1em;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Ripple effect styling */
@@ -110,4 +77,76 @@ button:hover {
         transform: scale(4);
         opacity: 0;
     }
+}
+
+/* Success Message Styling */
+#successMessage {
+    display: none;
+    color: yellow;
+    font-size: 1.2em;
+    margin-top: 15px;
+}
+
+/* Notes List Styling */
+#notesList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#notesList li {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+#notesList li:hover {
+    transform: translateY(-5px);
+}
+
+.note-user {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #FFD700; /* Gold color */
+}
+
+.note-timestamp {
+    font-size: 0.85em;
+    color: #bbb;
+    margin-top: -5px;
+}
+
+.note-text {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    font-size: 1em;
+    color: #ddd;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 0.9em;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+.no-notes {
+    background-color: #f0f0f0;
+    color: #888;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.1em;
 }
