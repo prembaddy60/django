@@ -17,43 +17,49 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// DOM Elements
+// Elements
 const userNameInput = document.getElementById('userNameInput');
 const noteInput = document.getElementById('noteInput');
 const saveNoteBtn = document.getElementById('saveNoteBtn');
 const successMessage = document.getElementById('successMessage');
 
 // Save note to Firebase
-saveNoteBtn.addEventListener('click', function () {
-    const userName = userNameInput.value.trim();
-    const noteText = noteInput.value.trim();
+saveNoteBtn.addEventListener('click', function() {
+    const userName = userNameInput.value;
+    const noteText = noteInput.value;
 
     if (userName && noteText) {
         const newNoteRef = ref(database, 'notes/' + Date.now());
+
+        // Save the note to Firebase Database
         set(newNoteRef, {
             user: userName,
             note: noteText,
             timestamp: Date.now()
         }).then(() => {
-            // Trigger button animation
-            saveNoteBtn.classList.add('clicked');
+            // Trigger animation on the save button after saving
+            saveNoteBtn.classList.add('clicked');  // Add class to trigger animation
 
-            // Display success message with animation
-            successMessage.classList.add('show');
+            // Display success message
+            successMessage.classList.add('show');  // Add show class to make message visible
 
             // Hide success message after 3 seconds
             setTimeout(() => {
-                successMessage.classList.remove('show');
+                successMessage.classList.remove('show');  // Remove class to hide message
             }, 3000);
 
-            // Reset input fields
+            // Reset the input fields
             userNameInput.value = '';
             noteInput.value = '';
+
+            // Remove animation class after animation ends
+            setTimeout(() => {
+                saveNoteBtn.classList.remove('clicked');
+            }, 500);  // Match this time with the animation duration
         }).catch((error) => {
             console.error("Error saving note:", error);
-            alert("Failed to save note. Please try again.");
         });
     } else {
-        alert("Please provide both your name and a note.");
+        alert("Please provide your name and a note.");
     }
 });
