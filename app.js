@@ -23,39 +23,8 @@ const noteInput = document.getElementById('noteInput');
 const saveNoteBtn = document.getElementById('saveNoteBtn');
 const successMessage = document.getElementById('successMessage');
 
-// Save note to Firebase
-saveNoteBtn.addEventListener('click', function(e) {
-    const userName = userNameInput.value;
-    const noteText = noteInput.value;
-
-    if (userName && noteText) {
-        const newNoteRef = ref(database, 'notes/' + Date.now());
-
-        // Save the note to Firebase Database
-        set(newNoteRef, {
-            user: userName,
-            note: noteText,
-            timestamp: Date.now()
-        }).then(() => {
-            // Trigger ripple effect
-            triggerRippleEffect(e);
-
-            // Display success message
-            successMessage.style.display = 'block';
-            successMessage.style.color = 'yellow'; // Change message text color to yellow
-
-            // Hide success message after 3 seconds
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 3000);
-        }).catch((error) => {
-            console.error("Error saving note: ", error);
-        });
-    }
-});
-
 // Ripple effect function
-function triggerRippleEffect(event) {
+saveNoteBtn.addEventListener("click", function (event) {
     const button = event.target;
     const rect = button.getBoundingClientRect();
     const ripple = document.createElement("span");
@@ -70,8 +39,49 @@ function triggerRippleEffect(event) {
 
     button.appendChild(ripple);
 
-    // Remove the ripple after the animation
+    // Remove the ripple after animation
     ripple.addEventListener("animationend", () => {
         ripple.remove();
     });
-}
+});
+
+// Save note to Firebase and display success message
+saveNoteBtn.addEventListener('click', function() {
+    const userName = userNameInput.value;
+    const noteText = noteInput.value;
+
+    if (userName && noteText) {
+        const newNoteRef = ref(database, 'notes/' + Date.now());
+
+        // Save the note to Firebase Database
+        set(newNoteRef, {
+            user: userName,
+            note: noteText,
+            timestamp: Date.now()
+        }).then(() => {
+            // Trigger ripple effect on button click
+            saveNoteBtn.classList.add('clicked');
+
+            // Show success message
+            successMessage.style.display = 'block';
+
+            // Hide the success message after 3 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+
+            // Reset the input fields
+            userNameInput.value = '';
+            noteInput.value = '';
+
+            // Remove the ripple effect class after animation ends
+            setTimeout(() => {
+                saveNoteBtn.classList.remove('clicked');
+            }, 500);  // Match this time with the animation duration
+        }).catch((error) => {
+            console.error("Error saving note:", error);
+        });
+    } else {
+        alert("Please provide your name and a note.");
+    }
+});
