@@ -29,16 +29,12 @@ saveNoteBtn.addEventListener('click', function () {
     const noteText = noteInput.value.trim();
 
     if (userName && noteText) {
-        console.log("Saving note...");
-
         const newNoteRef = ref(database, 'notes/' + Date.now());
         set(newNoteRef, {
             user: userName,
             note: noteText,
             timestamp: Date.now()
         }).then(() => {
-            console.log("Note saved successfully!");
-
             // Trigger button animation
             saveNoteBtn.classList.add('clicked');
 
