@@ -1,4 +1,4 @@
-/* Basic CSS Styling */
+/* Global Styles */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f9;
@@ -13,60 +13,28 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    font-size: 1.1em;
-    animation: fadeInBackground 5s ease-in-out;
 }
 
-@keyframes fadeInBackground {
-    0% {
-        filter: brightness(50%);
-    }
-    100% {
-        filter: brightness(100%);
-    }
-}
-
+/* Container */
 .container {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 700px;
     width: 100%;
     text-align: center;
-    transform: scale(0.95);
-    animation: popIn 1.5s ease-in-out;
+    animation: fadeIn 1s ease;
 }
 
-@keyframes popIn {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
+/* Heading */
 h1 {
-    color: #F1C40F; /* Batman Yellow */
+    color: #F1C40F;
     font-size: 3em;
     margin-bottom: 20px;
-    text-transform: uppercase;
-    animation: glow 2s infinite alternate;
 }
 
-@keyframes glow {
-    0% {
-        text-shadow: 0 0 5px #F1C40F, 0 0 10px #F1C40F, 0 0 20px #F1C40F;
-    }
-    100% {
-        text-shadow: 0 0 20px #e1b10f, 0 0 30px #e1b10f, 0 0 40px #e1b10f;
-    }
-}
-
-/* Input and Textarea Fields */
+/* Input and Textarea */
 input, textarea {
     width: 100%;
     padding: 15px;
@@ -81,11 +49,9 @@ input, textarea {
 input:focus, textarea:focus {
     border-color: #F1C40F;
     outline: none;
-    transform: scale(1.02);
-    background-color: #fffef3;
 }
 
-/* Button Styling */
+/* Button */
 button {
     width: 100%;
     padding: 15px;
@@ -95,40 +61,41 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 button:hover {
     background-color: #e1b10f;
     transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-button:active {
-    transform: scale(0.98);
+/* Button Animation */
+button.clicked {
+    animation: buttonPress 0.5s ease-in-out;
 }
 
-/* Success Message Styling */
+@keyframes buttonPress {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+/* Success Message */
 #successMessage {
+    opacity: 0;
+    transform: translateY(20px);
     color: #27ae60;
     font-size: 18px;
     margin-top: 20px;
-    display: none;
-    animation: slideIn 0.5s ease forwards;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-@keyframes slideIn {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+#successMessage.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Notes List Styling for View Notes */
+/* Notes List */
 #notesList {
     list-style-type: none;
     padding: 0;
@@ -142,44 +109,14 @@ button:active {
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease;
 }
 
 #notesList li:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.note-user {
-    font-weight: bold;
-    font-size: 1.2em;
-    color: #333;
-}
-
-.note-timestamp {
-    font-size: 0.85em;
-    color: #777;
-    margin-top: -5px;
-}
-
-.note-text {
-    margin-top: 10px;
-    padding: 10px;
-    background: #f9f9f9;
-    border-radius: 5px;
-    font-size: 1.1em;
-    color: #444;
-}
-
-/* No Notes Found Styling */
-#notesList li.no-notes {
-    background-color: #f0f0f0;
-    color: #888;
-    text-align: center;
-    font-style: italic;
-}
-
-/* Responsive design for small screens */
+/* Responsive */
 @media (max-width: 600px) {
     h1 {
         font-size: 2em;
@@ -188,4 +125,10 @@ button:active {
     .container {
         padding: 20px;
     }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
