@@ -1,7 +1,8 @@
 /* Basic CSS Styling */
 body {
     font-family: 'Arial', sans-serif;
-    padding: 20px;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
     background-color: #121212; /* Dark background for Batman theme */
     color: #e0e0e0; /* Light color for text to contrast with dark background */
     display: flex;
@@ -21,6 +22,7 @@ h1 {
     font-size: 3em;
     margin-bottom: 20px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Adds depth to the title */
+    margin-top: 0;
 }
 
 /* Container Styling */
@@ -29,8 +31,8 @@ h1 {
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    max-width: 700px;
     width: 100%;
+    max-width: 600px; /* Limit the width of the container */
     text-align: center;
     color: #fff;
 }
@@ -48,6 +50,7 @@ input, textarea {
     transition: all 0.3s ease;
 }
 
+/* Focus effect for inputs */
 input:focus, textarea:focus {
     border-color: #f1c40f; /* Batman Yellow on focus */
     outline: none;
