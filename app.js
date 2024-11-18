@@ -48,38 +48,30 @@ saveNoteBtn.addEventListener('click', function(e) {
             setTimeout(() => {
                 successMessage.style.display = 'none';
             }, 3000);
-
-            // Reset the input fields
-            userNameInput.value = '';
-            noteInput.value = '';
         }).catch((error) => {
-            console.error("Error saving note:", error);
+            console.error("Error saving note: ", error);
         });
-    } else {
-        alert("Please provide your name and a note.");
     }
 });
 
-// Function to trigger the ripple effect
-function triggerRippleEffect(e) {
-    // Create the ripple element
-    const ripple = document.createElement('span');
-    ripple.classList.add('ripple');
+// Ripple effect function
+function triggerRippleEffect(event) {
+    const button = event.target;
+    const rect = button.getBoundingClientRect();
+    const ripple = document.createElement("span");
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
 
-    // Append the ripple to the button
-    saveNoteBtn.appendChild(ripple);
-
-    // Get the button's dimensions and position
-    const rect = saveNoteBtn.getBoundingClientRect();
-    const size = Math.max(saveNoteBtn.offsetWidth, saveNoteBtn.offsetHeight); // Get the larger dimension (width or height)
-
-    // Position the ripple at the click location
     ripple.style.width = ripple.style.height = `${size}px`;
-    ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
-    ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+    ripple.classList.add("ripple");
 
-    // Remove the ripple after the animation ends
-    setTimeout(() => {
+    button.appendChild(ripple);
+
+    // Remove the ripple after the animation
+    ripple.addEventListener("animationend", () => {
         ripple.remove();
-    }, 600);  // Match this time with the ripple animation duration
+    });
 }
