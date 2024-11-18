@@ -41,7 +41,7 @@ saveNoteBtn.addEventListener('click', function() {
             successMessage.classList.add('show');  // Add class to trigger animation
 
             // Display success message
-            successMessage.style.display = 'block';
+            successMessage.style.display = 'block'; // Ensure it's visible
 
             // Hide success message after 3 seconds
             setTimeout(() => {
