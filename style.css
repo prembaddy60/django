@@ -15,24 +15,47 @@ body {
     background-attachment: fixed;
 }
 
-/* Header Styling with continuous pulse glow effect */
+/* Header Styling with Gradient Color Animation */
 h1 {
     text-align: center;
-    color: #f1c40f;
     font-size: 3em;
     margin-bottom: 20px;
     margin-top: 0;
     text-shadow: 0 0 10px #f1c40f, 0 0 20px #f1c40f, 0 0 30px #f1c40f;
-    animation: pulseGlow 2s infinite alternate; /* Adding continuous pulse glow animation */
+    animation: gradientColor 5s ease infinite; /* Add the gradient animation */
 }
 
-/* Pulse Glow Animation */
-@keyframes pulseGlow {
+/* Gradient Color Animation */
+@keyframes gradientColor {
     0% {
-        text-shadow: 0 0 10px #f1c40f, 0 0 20px #f1c40f, 0 0 30px #f1c40f, 0 0 40px #f1c40f;
+        color: #f1c40f; /* Yellow */
+        background: linear-gradient(45deg, #f1c40f, #e74c3c);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+    25% {
+        color: #e74c3c; /* Red */
+        background: linear-gradient(45deg, #e74c3c, #3498db);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+    50% {
+        color: #3498db; /* Blue */
+        background: linear-gradient(45deg, #3498db, #9b59b6);
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+    75% {
+        color: #9b59b6; /* Purple */
+        background: linear-gradient(45deg, #9b59b6, #2ecc71);
+        -webkit-background-clip: text;
+        background-clip: text;
     }
     100% {
-        text-shadow: 0 0 20px #f1c40f, 0 0 30px #f1c40f, 0 0 40px #f1c40f, 0 0 50px #f1c40f;
+        color: #2ecc71; /* Green */
+        background: linear-gradient(45deg, #2ecc71, #f1c40f);
+        -webkit-background-clip: text;
+        background-clip: text;
     }
 }
 
