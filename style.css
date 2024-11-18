@@ -3,8 +3,8 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #121212; /* Dark background for Batman theme */
+    color: #e0e0e0; /* Light color for text to contrast with dark background */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,18 +21,18 @@ h1 {
     color: #f1c40f; /* Batman Yellow */
     font-size: 3em;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Adds depth to the title */
     margin-top: 0;
 }
 
 /* Container Styling */
 .container {
-    background-color: rgba(0, 0, 0, 0.7); 
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background for the container */
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     width: 100%;
-    max-width: 600px;
+    max-width: 600px; /* Limit the width of the container */
     text-align: center;
     color: #fff;
 }
@@ -52,7 +52,7 @@ input, textarea {
 
 /* Focus effect for inputs */
 input:focus, textarea:focus {
-    border-color: #f1c40f;
+    border-color: #f1c40f; /* Batman Yellow on focus */
     outline: none;
     box-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
 }
@@ -75,7 +75,7 @@ button {
 /* Button Hover Effect */
 button:hover {
     background-color: #e1b10f;
-    transform: scale(1.05);
+    transform: scale(1.05); /* Slight scale effect on hover */
 }
 
 /* Ripple effect */
@@ -140,7 +140,7 @@ button .ripple {
 .note-user {
     font-weight: bold;
     font-size: 1.1em;
-    color: #f1c40f; 
+    color: #f1c40f; /* Batman Yellow */
 }
 
 /* Timestamp Styling */
