@@ -37,25 +37,20 @@ saveNoteBtn.addEventListener('click', function() {
             note: noteText,
             timestamp: Date.now()
         }).then(() => {
-            // Trigger animation on the save button after saving
-            saveNoteBtn.classList.add('clicked');  // Add class to trigger animation
-
             // Display success message
-            successMessage.classList.add('show');  // Add show class to make message visible
+            successMessage.style.display = 'block';
+            successMessage.classList.add('show');  // Ensure the 'show' class is added
 
             // Hide success message after 3 seconds
             setTimeout(() => {
-                successMessage.classList.remove('show');  // Remove class to hide message
+                successMessage.classList.remove('show');
+                successMessage.style.display = 'none';
             }, 3000);
 
             // Reset the input fields
             userNameInput.value = '';
             noteInput.value = '';
 
-            // Remove animation class after animation ends
-            setTimeout(() => {
-                saveNoteBtn.classList.remove('clicked');
-            }, 500);  // Match this time with the animation duration
         }).catch((error) => {
             console.error("Error saving note:", error);
         });
