@@ -1,69 +1,85 @@
 /* Basic CSS Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: url('https://wallpapersok.com/images/high/dc-comics-minimalist-batman-art-7v7sgjlhrkk21fem.webp') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    height: 100vh;
+    background-color: #121212;
+    color: #e0e0e0;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    background-image: url('https://wallpapersok.com/images/high/dc-comics-minimalist-batman-art-7v7sgjlhrkk21fem.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
+/* Header Styling */
 h1 {
     text-align: center;
-    font-family: 'BatmanForeverAlternate', sans-serif;
+    color: #f1c40f; /* Batman Yellow */
     font-size: 3em;
-    color: #FFD700; /* Gold color */
-    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
-}
-
-/* Note input form styling */
-.container {
-    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.8);
-    text-align: center;
-    width: 350px;
-}
-
-input, textarea, button {
-    background-color: #333;
-    border: 1px solid #555;
-    color: #fff;
-    border-radius: 5px;
-    font-size: 1.1em;
-    padding: 10px;
     margin-bottom: 20px;
-    width: 100%;
-    box-sizing: border-box;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    margin-top: 0;
 }
 
-/* Ripple effect styling */
+/* Container Styling */
+.container {
+    background-color: rgba(0, 0, 0, 0.7); 
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    color: #fff;
+}
+
+/* Input Fields Styling */
+input, textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+/* Focus effect for inputs */
+input:focus, textarea:focus {
+    border-color: #f1c40f;
+    outline: none;
+    box-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+}
+
+/* Save Button Styling */
 button {
-    position: relative;
-    overflow: hidden;
-    padding: 15px 25px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #f44336; /* Red background */
+    width: 100%;
+    padding: 15px;
+    background-color: #f1c40f;
     color: white;
+    font-size: 1.2em;
     border: none;
     border-radius: 5px;
-    outline: none;
-    transition: background-color 0.3s ease;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Hover effect */
+/* Button Hover Effect */
 button:hover {
-    background-color: #d32f2f;
+    background-color: #e1b10f;
+    transform: scale(1.05);
 }
 
-/* Ripple effect styling */
-.ripple {
+/* Ripple effect */
+button .ripple {
     position: absolute;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.6);
@@ -71,7 +87,6 @@ button:hover {
     pointer-events: none;
 }
 
-/* Ripple animation */
 @keyframes ripple-animation {
     to {
         transform: scale(4);
@@ -79,57 +94,75 @@ button:hover {
     }
 }
 
-/* Success Message Styling */
+/* Success message Styling */
 #successMessage {
+    color: #f1c40f;
+    font-size: 18px;
+    margin-top: 20px;
     display: none;
-    color: yellow;
-    font-size: 1.2em;
-    margin-top: 15px;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Animation for Success Message */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* Notes List Styling */
 #notesList {
     list-style-type: none;
     padding: 0;
+    margin-top: 30px;
 }
 
 #notesList li {
     margin-bottom: 20px;
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid #fff;
+    background-color: #222;
+    border: 1px solid #444;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
+/* Hover Effect for Notes */
 #notesList li:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
 }
 
+/* User Styling */
 .note-user {
     font-weight: bold;
     font-size: 1.1em;
-    color: #FFD700; /* Gold color */
+    color: #f1c40f; 
 }
 
+/* Timestamp Styling */
 .note-timestamp {
     font-size: 0.85em;
-    color: #bbb;
+    color: #777;
     margin-top: -5px;
 }
 
+/* Note Text Styling */
 .note-text {
     margin-top: 10px;
     padding: 10px;
-    background: rgba(255, 255, 255, 0.1);
+    background: #333;
     border-radius: 5px;
     font-size: 1em;
-    color: #ddd;
+    color: #e0e0e0;
 }
 
+/* Delete Button Styling */
 .delete-btn {
-    background-color: #f44336;
+    background-color: #e74c3c;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -137,16 +170,31 @@ button:hover {
     margin-top: 10px;
     font-size: 0.9em;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
+/* Delete Button Hover Effect */
 .delete-btn:hover {
-    background-color: #d32f2f;
+    background-color: #c0392b;
 }
 
+/* Styling for when there are no notes */
 .no-notes {
-    background-color: #f0f0f0;
+    background-color: #333;
     color: #888;
     text-align: center;
     padding: 15px;
     font-size: 1.1em;
+    border-radius: 5px;
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    .container {
+        padding: 20px;
+    }
 }
