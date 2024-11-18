@@ -13,25 +13,28 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    overflow: hidden;
 }
 
 /* Container */
 .container {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
     width: 100%;
     text-align: center;
-    animation: fadeIn 1s ease;
+    animation: fadeIn 1s ease-in-out;
 }
 
 /* Heading */
 h1 {
     color: #F1C40F;
-    font-size: 3em;
-    margin-bottom: 20px;
+    font-size: 3.5em;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 /* Input and Textarea */
@@ -39,96 +42,23 @@ input, textarea {
     width: 100%;
     padding: 15px;
     margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
     font-size: 1.1em;
     background-color: #f9f9f9;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    box-sizing: border-box;
 }
 
 input:focus, textarea:focus {
     border-color: #F1C40F;
     outline: none;
+    transform: scale(1.05);
 }
 
-/* Button */
+/* Button Styling */
 button {
     width: 100%;
     padding: 15px;
     background-color: #F1C40F;
-    color: white;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #e1b10f;
-    transform: scale(1.05);
-}
-
-/* Button Animation */
-button.clicked {
-    animation: buttonPress 0.5s ease-in-out;
-}
-
-@keyframes buttonPress {
-    0% { transform: scale(1); }
-    50% { transform: scale(0.9); }
-    100% { transform: scale(1); }
-}
-
-/* Success Message */
-#successMessage {
-    opacity: 0;
-    transform: translateY(20px);
-    color: #27ae60;
-    font-size: 18px;
-    margin-top: 20px;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-#successMessage.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Notes List */
-#notesList {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-#notesList li {
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-}
-
-#notesList li:hover {
-    transform: translateY(-5px);
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 2em;
-    }
-
-    .container {
-        padding: 20px;
-    }
-}
-
-/* Animations */
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
+    color: whi
