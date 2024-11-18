@@ -15,19 +15,19 @@ body {
     background-attachment: fixed;
 }
 
-/* Header Styling with continuous animation */
+/* Header Styling with continuous pulse glow effect */
 h1 {
     text-align: center;
     color: #f1c40f;
     font-size: 3em;
     margin-bottom: 20px;
     margin-top: 0;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-    animation: glow 2s infinite alternate; /* Adding continuous glow animation */
+    text-shadow: 0 0 10px #f1c40f, 0 0 20px #f1c40f, 0 0 30px #f1c40f;
+    animation: pulseGlow 2s infinite alternate; /* Adding continuous pulse glow animation */
 }
 
-/* Continuous glowing animation */
-@keyframes glow {
+/* Pulse Glow Animation */
+@keyframes pulseGlow {
     0% {
         text-shadow: 0 0 10px #f1c40f, 0 0 20px #f1c40f, 0 0 30px #f1c40f, 0 0 40px #f1c40f;
     }
@@ -106,6 +106,43 @@ button:hover {
     }
 }
 
+/* Typewriting effect for notes */
+.note-text {
+    margin-top: 10px;
+    padding: 10px;
+    background: #333;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #e0e0e0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite;
+}
+
+/* Typewriting Animation */
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* Cursor Blink Effect for Typing Animation */
+@keyframes blink {
+    0% {
+        border-right: 3px solid transparent;
+    }
+    50% {
+        border-right: 3px solid #f1c40f;
+    }
+    100% {
+        border-right: 3px solid transparent;
+    }
+}
+
 /* Notes List Styling */
 #notesList {
     list-style-type: none;
@@ -141,16 +178,6 @@ button:hover {
     font-size: 0.85em;
     color: #777;
     margin-top: -5px;
-}
-
-/* Note Text Styling */
-.note-text {
-    margin-top: 10px;
-    padding: 10px;
-    background: #333;
-    border-radius: 5px;
-    font-size: 1em;
-    color: #e0e0e0;
 }
 
 /* Delete Button Styling */
