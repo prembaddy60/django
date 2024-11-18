@@ -79,14 +79,14 @@ button:hover {
     font-size: 18px;
     margin-top: 20px;
     transition: opacity 0.5s ease, transform 0.5s ease;
-    display: none;
+    display: block;
+    font-weight: bold;
 }
 
 /* Show Success Message */
 #successMessage.show {
     opacity: 1;
     transform: translateY(0);
-    display: block;
 }
 
 /* Notes List Styling for View Notes */
