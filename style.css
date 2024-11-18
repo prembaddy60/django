@@ -68,6 +68,38 @@ input:focus, textarea:focus {
     box-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
 }
 
+/* Apply typewriter effect to input placeholders */
+input::placeholder, textarea::placeholder {
+    color: #f1c40f; /* Yellow for placeholder text */
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite;
+}
+
+/* Typewriting Animation */
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* Cursor Blink Effect for Typing Animation */
+@keyframes blink {
+    0% {
+        border-right: 3px solid transparent;
+    }
+    50% {
+        border-right: 3px solid #f1c40f;
+    }
+    100% {
+        border-right: 3px solid transparent;
+    }
+}
+
 /* Save Button Styling */
 button {
     width: 100%;
@@ -103,43 +135,6 @@ button:hover {
     }
     to {
         opacity: 1;
-    }
-}
-
-/* Typewriting effect for notes */
-.note-text {
-    margin-top: 10px;
-    padding: 10px;
-    background: #333;
-    border-radius: 5px;
-    font-size: 1em;
-    color: #e0e0e0;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 0;
-    animation: typing 3s steps(30) 1s forwards, blink 0.75s step-end infinite;
-}
-
-/* Typewriting Animation */
-@keyframes typing {
-    0% {
-        width: 0;
-    }
-    100% {
-        width: 100%;
-    }
-}
-
-/* Cursor Blink Effect for Typing Animation */
-@keyframes blink {
-    0% {
-        border-right: 3px solid transparent;
-    }
-    50% {
-        border-right: 3px solid #f1c40f;
-    }
-    100% {
-        border-right: 3px solid transparent;
     }
 }
 
