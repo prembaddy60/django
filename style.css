@@ -3,8 +3,8 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #121212; /* Dark background for Batman theme */
-    color: #e0e0e0; /* Light color for text to contrast with dark background */
+    background-color: #121212;
+    color: #e0e0e0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,24 +15,35 @@ body {
     background-attachment: fixed;
 }
 
-/* Header Styling */
+/* Header Styling with continuous animation */
 h1 {
     text-align: center;
-    color: #f1c40f; /* Batman Yellow */
+    color: #f1c40f;
     font-size: 3em;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Adds depth to the title */
     margin-top: 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    animation: glow 2s infinite alternate; /* Adding continuous glow animation */
+}
+
+/* Continuous glowing animation */
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 10px #f1c40f, 0 0 20px #f1c40f, 0 0 30px #f1c40f, 0 0 40px #f1c40f;
+    }
+    100% {
+        text-shadow: 0 0 20px #f1c40f, 0 0 30px #f1c40f, 0 0 40px #f1c40f, 0 0 50px #f1c40f;
+    }
 }
 
 /* Container Styling */
 .container {
-    background-color: rgba(0, 0, 0, 0.7); /* Darker background for the container */
+    background-color: rgba(0, 0, 0, 0.7);
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     width: 100%;
-    max-width: 600px; /* Limit the width of the container */
+    max-width: 600px;
     text-align: center;
     color: #fff;
 }
@@ -52,7 +63,7 @@ input, textarea {
 
 /* Focus effect for inputs */
 input:focus, textarea:focus {
-    border-color: #f1c40f; /* Batman Yellow on focus */
+    border-color: #f1c40f;
     outline: none;
     box-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
 }
@@ -68,30 +79,12 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    position: relative;
-    overflow: hidden;
 }
 
 /* Button Hover Effect */
 button:hover {
     background-color: #e1b10f;
-    transform: scale(1.05); /* Slight scale effect on hover */
-}
-
-/* Ripple effect */
-button .ripple {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.6);
-    animation: ripple-animation 0.6s linear;
-    pointer-events: none;
-}
-
-@keyframes ripple-animation {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
+    transform: scale(1.05);
 }
 
 /* Success message Styling */
@@ -140,7 +133,7 @@ button .ripple {
 .note-user {
     font-weight: bold;
     font-size: 1.1em;
-    color: #f1c40f; /* Batman Yellow */
+    color: #f1c40f;
 }
 
 /* Timestamp Styling */
