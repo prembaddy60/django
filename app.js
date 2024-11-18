@@ -29,18 +29,20 @@ saveNoteBtn.addEventListener('click', function () {
     const noteText = noteInput.value.trim();
 
     if (userName && noteText) {
-        const newNoteRef = ref(database, 'notes/' + Date.now());
+        console.log("Saving note...");
 
-        // Save note to Firebase
+        const newNoteRef = ref(database, 'notes/' + Date.now());
         set(newNoteRef, {
             user: userName,
             note: noteText,
             timestamp: Date.now()
         }).then(() => {
-            // Trigger animation on the button
+            console.log("Note saved successfully!");
+
+            // Trigger button animation
             saveNoteBtn.classList.add('clicked');
 
-            // Show success message with animation
+            // Display success message with animation
             successMessage.classList.add('show');
 
             // Hide success message after 3 seconds
@@ -51,14 +53,9 @@ saveNoteBtn.addEventListener('click', function () {
             // Reset input fields
             userNameInput.value = '';
             noteInput.value = '';
-
-            // Remove animation class
-            setTimeout(() => {
-                saveNoteBtn.classList.remove('clicked');
-            }, 500);
         }).catch((error) => {
             console.error("Error saving note:", error);
-            alert("An error occurred while saving the note. Please try again.");
+            alert("Failed to save note. Please try again.");
         });
     } else {
         alert("Please provide both your name and a note.");
