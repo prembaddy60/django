@@ -37,9 +37,11 @@ saveNoteBtn.addEventListener('click', function() {
             note: noteText,
             timestamp: Date.now()
         }).then(() => {
+            // Trigger animation on the success message
+            successMessage.classList.add('show');  // Add class to trigger animation
+
             // Display success message
             successMessage.style.display = 'block';
-            successMessage.classList.add('show');  // Ensure the 'show' class is added
 
             // Hide success message after 3 seconds
             setTimeout(() => {
