@@ -3,31 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canvas Animation Example</title>
+    <link rel="icon" href="https://icons-for-free.com/iff/png/512/batman+hero+man+saver+super+superhero+icon-1320195495753243967.png" type="image/x-icon">
+    <title>Notes App</title>
+    
+    <!-- Firebase SDKs -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
+
+    <!-- Link to custom JavaScript (app.js) -->
+    <script type="module" defer src="app.js"></script>
+
+    <!-- Link to external CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Background Canvas -->
-    <canvas id="backgroundCanvas"></canvas>
+    <!-- Canvas for background animation -->
+    <canvas id="backgroundCanvas" class="backgroundCanvas"></canvas>
 
-    <!-- Container with Form -->
     <div class="container">
-        <h1>Canvas Animation</h1>
-        
-        <!-- Input Form -->
-        <input type="text" id="noteTitle" placeholder="Enter note title">
-        <textarea id="noteContent" placeholder="Enter note content"></textarea>
-        
-        <!-- Save Button -->
-        <button id="saveBtn">Save Note</button>
+        <h1>DJANGO PR</h1>
 
-        <!-- Success Message -->
-        <div id="successMessage">Saved Successfully!</div>
+        <!-- Note input form -->
+        <div>
+            <input type="text" id="userNameInput" placeholder="Enter your name"><br>
+            <textarea id="noteInput" placeholder="Write your note here..."></textarea><br>
+            <button id="saveNoteBtn">Save Note</button>
 
-        <!-- Notes List -->
-        <ul id="notesList"></ul>
+            <!-- Success message below the button -->
+            <div id="successMessage" style="display: none;">Note saved successfully!</div>
+        </div>
     </div>
-
-    <script src="app.js"></script>
 </body>
 </html>
