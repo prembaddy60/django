@@ -107,8 +107,10 @@ function animateParticles() {
 }
 
 canvas.addEventListener("mousemove", createParticles);
+
 function animate() {
     animateParticles();
     requestAnimationFrame(animate);
 }
+
 animate();
