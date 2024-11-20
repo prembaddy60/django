@@ -1,3 +1,4 @@
+<style>
 /* Basic CSS Styling */
 body {
     font-family: 'Arial', sans-serif;
@@ -22,7 +23,7 @@ h1 {
     margin-bottom: 20px;
     margin-top: 0;
     text-shadow: 0 0 10px #f1c40f, 0 0 20px #f1c40f, 0 0 30px #f1c40f;
-    animation: gradientColor 5s ease infinite; /* Add the gradient animation */
+    animation: gradientColor 5s ease infinite;
 }
 
 /* Gradient Color Animation */
@@ -236,3 +237,4 @@ button:hover {
         padding: 20px;
     }
 }
+</style>
