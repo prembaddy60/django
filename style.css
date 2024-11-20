@@ -1,4 +1,14 @@
-<style>
+/* Canvas Styling */
+#backgroundCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure it's behind other content */
+    pointer-events: none; /* Disable interactions with the canvas */
+}
+
 /* Basic CSS Styling */
 body {
     font-family: 'Arial', sans-serif;
@@ -9,11 +19,22 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-image: url('https://wallpapersok.com/images/high/dc-comics-minimalist-batman-art-7v7sgjlhrkk21fem.webp');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    min-height: 100vh; /* Ensure the body covers the full screen */
+    flex-direction: column;
+}
+
+/* Container Styling */
+.container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    color: #fff;
+    position: relative; /* Ensure the content stays on top of the canvas */
+    z-index: 1; /* Content stays above canvas */
 }
 
 /* Header Styling with Gradient Color Animation */
@@ -58,18 +79,6 @@ h1 {
         -webkit-background-clip: text;
         background-clip: text;
     }
-}
-
-/* Container Styling */
-.container {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
-    color: #fff;
 }
 
 /* Input Fields Styling */
@@ -237,4 +246,3 @@ button:hover {
         padding: 20px;
     }
 }
-</style>
