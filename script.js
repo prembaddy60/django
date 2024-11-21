@@ -41,8 +41,8 @@ signInButton.addEventListener('click', function () {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 console.log('User signed in:', userCredential.user);
-                // Redirect to the main index page
-                window.location.href = 'index.html';
+                // Redirect to login.html after successful login
+                window.location.href = 'login.html';
             })
             .catch((error) => {
                 console.error('Error signing in:', error.message);
@@ -52,3 +52,4 @@ signInButton.addEventListener('click', function () {
         alert('Please enter email and password');
     }
 });
+
