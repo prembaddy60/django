@@ -12,64 +12,43 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Get the necessary Firebase authentication methods
-const auth = firebase.auth();
+// Get references to DOM elements
+const emailGroup = document.getElementById('email-group');
+const passwordGroup = document.getElementById('password-group');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const nextButton = document.getElementById('next-btn');
+const signInButton = document.getElementById('sign-in-btn');
 
-// This function is triggered when the user clicks the 'Next' button
-function handleNext() {
-    var emailInput = document.getElementById("email");
-    var emailGroup = document.getElementById("email-group");
-    var passwordGroup = document.getElementById("password-group");
-
-    // Check if the email input is not empty
-    if (emailInput.value) {
-        // Hide the email input field and show the password input field
-        emailGroup.classList.add("hidden");
-        passwordGroup.classList.remove("hidden");
-        passwordGroup.querySelector("input").focus(); // Focus the password field
+// Show password input group when "Next" button is clicked
+nextButton.addEventListener('click', function () {
+    const email = emailInput.value;
+    if (email) {
+        emailGroup.classList.add('hidden'); // Hide email input group
+        passwordGroup.classList.remove('hidden'); // Show password input group
     } else {
-        // If the email field is empty, show an alert
-        alert("Please enter your email address");
+        alert('Please enter your email');
     }
-}
+});
 
-// This function is triggered when the user clicks the 'Sign In' button after entering the password
-function handleSignIn() {
-    var emailInput = document.getElementById("email").value;
-    var passwordInput = document.getElementById("password").value;
+// Handle sign-in button click
+signInButton.addEventListener('click', function () {
+    const email = emailInput.value;
+    const password = passwordInput.value;
 
-    // Ensure email and password are filled out
-    if (emailInput && passwordInput) {
-        // Firebase sign-in using email and password
-        auth.signInWithEmailAndPassword(emailInput, passwordInput)
+    if (email && password) {
+        // Authenticate user with Firebase
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                // Successfully signed in
-                alert("Signed in successfully!");
-                window.location.href = "index.html"; // Redirect to the main page
+                console.log('User signed in:', userCredential.user);
+                // Redirect to the main index page
+                window.location.href = 'index.html';
             })
             .catch((error) => {
-                // If there is an error, show the error message
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                alert("Error: " + errorMessage);
+                console.error('Error signing in:', error.message);
+                alert(error.message);
             });
     } else {
-        alert("Please fill in both fields");
-    }
-}
-
-// Add event listeners for Enter key press to trigger Next and Sign In actions
-document.getElementById("email").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        handleNext(); // Trigger 'Next' when Enter is pressed on the email field
+        alert('Please enter email and password');
     }
 });
-
-document.getElementById("password").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        handleSignIn(); // Trigger 'Sign In' when Enter is pressed on the password field
-    }
-});
-
-
-
