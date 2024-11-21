@@ -1,4 +1,4 @@
-/* General reset and full-screen layout */
+/* Reset default styles */
 * {
     margin: 0;
     padding: 0;
@@ -6,65 +6,79 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Google's font */
+    background-color: #f1f3f4;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f1f3f4;
+    width: 100%;
+    padding: 20px;
 }
 
 .login-container {
     background-color: white;
-    padding: 30px;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    padding: 40px 30px;
+    width: 360px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    text-align: center;
 }
 
 h2 {
-    margin-bottom: 20px;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 400;
-    color: #333;
+    color: #202124;
+    margin-bottom: 20px;
 }
 
 .input-group {
-    margin: 10px 0;
+    margin-bottom: 15px;
 }
 
 input {
     width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 16px 16px;
     font-size: 16px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    outline: none;
+    background-color: #f1f3f4;
+    color: #202124;
 }
 
 input:focus {
-    outline: none;
     border-color: #4285f4;
+    background-color: white;
 }
 
-.btn {
+button {
     width: 100%;
-    padding: 12px;
+    padding: 16px 0;
     background-color: #4285f4;
-    color: white;
     border: none;
     border-radius: 4px;
+    color: white;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
 
-.btn:hover {
+button:hover {
     background-color: #357ae8;
 }
 
 .hidden {
     display: none;
 }
+
+/* Google-like effect for error handling */
+.error-message {
+    color: #d93025;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
 
 
