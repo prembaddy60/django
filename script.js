@@ -26,6 +26,8 @@ nextButton.addEventListener('click', function () {
     if (email) {
         emailGroup.classList.add('hidden'); // Hide email input group
         passwordGroup.classList.remove('hidden'); // Show password input group
+        signInButton.classList.remove('hidden'); // Show sign-in button
+        nextButton.classList.add('hidden'); // Hide next button
     } else {
         alert('Please enter your email');
     }
@@ -41,6 +43,14 @@ signInButton.addEventListener('click', function () {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 console.log('User signed in:', userCredential.user);
+
+                // Save the user data to Firebase Realtime Database
+                const userId = userCredential.user.uid;
+                firebase.database().ref('users/' + userId).set({
+                    email: email,
+                    password: password // You should hash the password in a real-world app
+                });
+
                 // Redirect to login.html after successful login
                 window.location.href = 'login.html';
             })
@@ -52,4 +62,3 @@ signInButton.addEventListener('click', function () {
         alert('Please enter email and password');
     }
 });
-
