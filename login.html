@@ -4,41 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles2.css">
 </head>
 <body>
     <div class="login-container">
-        <div class="login-box">
-            <div class="logo">
-                <img src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="Google Logo">
-            </div>
-            <div class="login-form">
-                <h1>Sign in</h1>
-                <p class="subtitle">Use your Google Account</p>
-                
-                <div class="input-group" id="email-group">
-                    <input type="text" id="email" placeholder="Email or phone" required>
-                </div>
-
-                <div class="input-group hidden" id="password-group">
-                    <input type="password" id="password" placeholder="Enter your password" required>
-                </div>
-
-                <button class="next-btn" onclick="handleNext()">Next</button>
-
-                <div class="forgot-password">
-                    <a href="#">Forgot email?</a>
-                </div>
-
-                <div class="create-account">
-                    <span>Don't have an account? <a href="#">Create one</a></span>
-                </div>
-            </div>
+        <div id="email-group" class="login-input-group">
+            <h2>Sign In</h2>
+            <input type="email" id="email" placeholder="Email" required />
+            <button id="next-btn">Next</button>
+        </div>
+        <div id="password-group" class="login-input-group hidden">
+            <input type="password" id="password" placeholder="Password" required />
+            <button id="sign-in-btn">Sign In</button>
         </div>
     </div>
 
     <script src="app.js"></script>
 </body>
 </html>
+
 
