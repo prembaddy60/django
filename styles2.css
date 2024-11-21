@@ -1,46 +1,57 @@
-/* Basic Reset */
+/* General reset and full-screen layout */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Container for the login form */
 body {
-    background: #f0f0f0;
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    font-family: 'Arial', sans-serif;
+    background-color: #f1f3f4;
 }
 
 .login-container {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 30px;
     width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    border-radius: 8px;
 }
 
-.login-input-group {
-    margin-bottom: 15px;
+h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #333;
 }
 
-input[type=email], input[type=password] {
-    width: calc(100% - 20px);
-    padding: 10px;
+.input-group {
     margin: 10px 0;
-    border: 1px solid #ddd;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
 }
 
-button {
+input:focus {
+    outline: none;
+    border-color: #4285f4;
+}
+
+.btn {
     width: 100%;
-    padding: 10px;
-    background: #007BFF;
+    padding: 12px;
+    background-color: #4285f4;
     color: white;
     border: none;
     border-radius: 4px;
@@ -48,18 +59,12 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    background: #0056b3;
+.btn:hover {
+    background-color: #357ae8;
 }
 
-/* Hidden state for password input group */
 .hidden {
     display: none;
 }
 
-/* Header styling */
-h2 {
-    color: #333;
-    margin-bottom: 20px;
-}
 
