@@ -147,4 +147,8 @@ body {
 .next:hover {
     background-color: #174ea6;
 }
+.hidden {
+  display: none;
+}
+
 
