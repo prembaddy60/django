@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="styles2.css">
-  <script defer src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </head>
 <body>
   <div class="container">
@@ -15,14 +15,29 @@
     <div class="login-box">
       <h1>Sign in</h1>
       <p class="subtitle">to continue to your application</p>
-      <div class="input-group">
-        <input type="text" id="email" placeholder=" " required>
-        <label for="email">Email or phone</label>
+
+      <!-- Email Step -->
+      <div class="step step-email">
+        <div class="input-group">
+          <input type="text" id="email" placeholder=" " required>
+          <label for="email">Email or phone</label>
+        </div>
+        <p class="forgot-email"><a href="#">Forgot email?</a></p>
+        <div class="buttons">
+          <a href="#" class="create-account">Create account</a>
+          <button class="next" id="nextBtn">Next</button>
+        </div>
       </div>
-      <p class="forgot-email"><a href="#">Forgot email?</a></p>
-      <div class="buttons">
-        <a href="#" class="create-account">Create account</a>
-        <button class="next" id="nextBtn">Next</button>
+
+      <!-- Password Step -->
+      <div class="step step-password hidden">
+        <div class="input-group">
+          <input type="password" id="password" placeholder=" " required>
+          <label for="password">Enter your password</label>
+        </div>
+        <div class="buttons">
+          <button class="next" id="signInBtn">Sign In</button>
+        </div>
       </div>
     </div>
     <div class="footer">
@@ -32,4 +47,5 @@
   </div>
 </body>
 </html>
+
 
