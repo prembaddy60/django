@@ -1,64 +1,41 @@
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
-    authDomain: "django-eb349.firebaseapp.com",
-    databaseURL: "https://django-eb349-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "django-eb349",
-    storageBucket: "django-eb349.appspot.com",
-    messagingSenderId: "271670409370",
-    appId: "1:271670409370:web:51498b4b417669173f8723"
-};
+// This listens for form submission (i.e., when user clicks "Next")
+document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();  // Prevent form from submitting
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+    var emailInput = document.getElementById('email');
+    var passwordInput = document.getElementById('password');
+    var email = emailInput.value;
+    var password = passwordInput ? passwordInput.value : '';  // Password input is optional until next
 
-// Get references to DOM elements
-const emailGroup = document.getElementById('email-group');
-const passwordGroup = document.getElementById('password-group');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-const nextButton = document.getElementById('next-btn');
-const signInButton = document.getElementById('sign-in-btn');
-
-// Show password input group when "Next" button is clicked
-nextButton.addEventListener('click', function () {
-    const email = emailInput.value;
-    if (email) {
-        emailGroup.classList.add('hidden'); // Hide email input group
-        passwordGroup.classList.remove('hidden'); // Show password input group
-        signInButton.classList.remove('hidden'); // Show sign-in button
-        nextButton.classList.add('hidden'); // Hide next button
+    // If the password field is not visible, it means we are on the email step
+    if (document.getElementById('password-group').classList.contains('hidden')) {
+        // Show the password field and hide the email field
+        document.getElementById('email-group').classList.add('hidden');
+        document.getElementById('password-group').classList.remove('hidden');
+        document.getElementById('next-btn').innerText = 'Sign in';  // Change button text to 'Sign in'
     } else {
-        alert('Please enter your email');
-    }
-});
-
-// Handle sign-in button click
-signInButton.addEventListener('click', function () {
-    const email = emailInput.value;
-    const password = passwordInput.value;
-
-    if (email && password) {
-        // Authenticate user with Firebase
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        // Now we attempt to sign in with email and password
+        auth.signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
-                console.log('User signed in:', userCredential.user);
+                // Sign-in successful, now store user data in Firebase Realtime Database
+                const user = userCredential.user;
 
-                // Save the user data to Firebase Realtime Database
-                const userId = userCredential.user.uid;
-                firebase.database().ref('users/' + userId).set({
-                    email: email,
-                    password: password // You should hash the password in a real-world app
+                // Storing data in Firebase Realtime Database
+                db.ref('users/' + user.uid).set({
+                    email: user.email,
+                    lastLogin: new Date().toString()
+                }).then(() => {
+                    // Redirect to main page after successful login and data storage
+                    window.location.href = "main_page.html";
+                }).catch((error) => {
+                    console.error('Error writing to Firebase: ', error);
+                    alert('Error saving data in Firebase: ' + error.message);
                 });
-
-                // Redirect to login.html after successful login
-                window.location.href = 'login.html';
             })
             .catch((error) => {
-                console.error('Error signing in:', error.message);
-                alert(error.message);
+                var errorMessage = error.message;
+                alert('Error: ' + errorMessage);
             });
-    } else {
-        alert('Please enter email and password');
     }
 });
+
