@@ -1,82 +1,93 @@
-body {
-    font-family: 'Roboto', Arial, sans-serif;
+/* General Reset */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    box-sizing: border-box;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    margin: 0;
 }
 
 .container {
     text-align: center;
     width: 100%;
     max-width: 360px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
     padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .logo img {
-    width: 100px;
+    width: 80px;
     margin-bottom: 16px;
 }
 
 .login-box h1 {
     font-size: 24px;
-    margin-bottom: 8px;
+    font-weight: 400;
     color: #202124;
+    margin-bottom: 8px;
 }
 
 .subtitle {
-    font-size: 14px;
+    font-size: 16px;
     color: #5f6368;
     margin-bottom: 24px;
 }
 
 .input-group {
     position: relative;
-    margin-bottom: 16px;
-    text-align: left;
+    margin-bottom: 24px;
+    width: 100%;
 }
 
 .input-group input {
     width: 100%;
-    padding: 10px 8px;
-    font-size: 16px;
+    padding: 10px;
+    padding-left: 8px;
     border: 1px solid #dadce0;
     border-radius: 4px;
-    outline: none;
+    font-size: 16px;
+    color: #202124;
+    background: #fff;
 }
 
 .input-group input:focus {
-    border-color: #4285f4;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    outline: none;
+    border: 1px solid #1a73e8;
+    box-shadow: 0 1px 3px rgba(26, 115, 232, 0.4);
 }
 
 .input-group label {
     position: absolute;
-    top: 12px;
-    left: 12px;
+    left: 8px;
+    top: 10px;
     font-size: 16px;
     color: #5f6368;
-    transition: 0.2s ease all;
     pointer-events: none;
+    transition: all 0.2s ease-in-out;
 }
 
 .input-group input:focus + label,
 .input-group input:not(:placeholder-shown) + label {
-    top: -8px;
+    top: -10px;
     left: 8px;
     font-size: 12px;
-    color: #4285f4;
+    color: #1a73e8;
 }
 
 .forgot-email {
     font-size: 14px;
-    margin: 16px 0;
+    margin-top: -16px;
+    margin-bottom: 24px;
 }
 
 .forgot-email a {
@@ -84,14 +95,23 @@ body {
     text-decoration: none;
 }
 
-.footer p {
+.forgot-email a:hover {
+    text-decoration: underline;
+}
+
+.footer {
     font-size: 12px;
     color: #5f6368;
+    margin-top: 24px;
 }
 
 .footer a {
     color: #1a73e8;
     text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
 }
 
 .buttons {
@@ -105,18 +125,26 @@ body {
     font-size: 14px;
     color: #1a73e8;
     text-decoration: none;
+    font-weight: bold;
+}
+
+.create-account:hover {
+    text-decoration: underline;
 }
 
 .next {
+    padding: 10px 16px;
     background-color: #1a73e8;
     color: #fff;
-    font-size: 14px;
-    padding: 8px 24px;
     border: none;
     border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .next:hover {
-    background-color: #1669c1;
+    background-color: #174ea6;
 }
+
