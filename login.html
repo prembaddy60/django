@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Dynamic Login</title>
   <link rel="stylesheet" href="styles2.css">
   <script type="module" src="script.js"></script>
 </head>
@@ -16,28 +16,14 @@
       <h1>Sign in</h1>
       <p class="subtitle">to continue to your application</p>
 
-      <!-- Email Step -->
-      <div class="step step-email">
-        <div class="input-group">
-          <input type="text" id="email" placeholder=" " required>
-          <label for="email">Email or phone</label>
-        </div>
-        <p class="forgot-email"><a href="#">Forgot email?</a></p>
-        <div class="buttons">
-          <a href="#" class="create-account">Create account</a>
-          <button class="next" id="nextBtn">Next</button>
-        </div>
+      <div class="input-group">
+        <input type="text" id="dynamicInput" placeholder=" " required>
+        <label for="dynamicInput" id="dynamicLabel">Email or phone</label>
       </div>
-
-      <!-- Password Step -->
-      <div class="step step-password hidden">
-        <div class="input-group">
-          <input type="password" id="password" placeholder=" " required>
-          <label for="password">Enter your password</label>
-        </div>
-        <div class="buttons">
-          <button class="next" id="signInBtn">Sign In</button>
-        </div>
+      <p class="forgot-email hidden"><a href="#">Forgot email?</a></p>
+      <div class="buttons">
+        <a href="#" class="create-account hidden" id="createAccount">Create account</a>
+        <button class="next" id="loginBtn">Next</button>
       </div>
     </div>
     <div class="footer">
@@ -47,5 +33,3 @@
   </div>
 </body>
 </html>
-
-
