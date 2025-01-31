@@ -1,7 +1,10 @@
+// viewNotes.js
+
+// Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 
-// Firebase configuration
+// Firebase configuration (use your actual config)
 const firebaseConfig = {
     apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
     authDomain: "django-eb349.firebaseapp.com",
@@ -16,13 +19,43 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Fetch and display notes
-window.onload = function() {
+// Credentials (modify as needed, but this is simple for the demo)
+const validCredentials = {
+    username: 'admin',
+    password: 'Shan1312'
+};
+
+// Function to check login credentials
+function login() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    // Check if credentials match
+    if (username === validCredentials.username && password === validCredentials.password) {
+        // Hide login form and show the main content
+        document.getElementById("loginForm").style.display = 'none';
+        document.getElementById("mainContent").style.display = 'block';
+
+        // Fetch and display notes
+        fetchNotes();
+    } else {
+        // Show error message if invalid credentials
+        document.getElementById("errorMessage").style.display = 'block';
+    }
+}
+
+// Function to fetch notes from Firebase
+async function fetchNotes() {
     const notesList = document.getElementById('notesList');
-    notesList.innerHTML = '';  // Clear the existing notes
+    const loadingMessage = document.getElementById('loadingMessage');
+    
+    notesList.innerHTML = '';  // Clear existing notes
+    loadingMessage.style.display = 'block';  // Show loading message
 
     const notesRef = ref(database, 'notes');
-    get(notesRef).then((snapshot) => {
+    try {
+        const snapshot = await get(notesRef);
+        loadingMessage.style.display = 'none';  // Hide loading message
         if (snapshot.exists()) {
             const notesData = snapshot.val();
             Object.keys(notesData).forEach(key => {
@@ -30,7 +63,6 @@ window.onload = function() {
                 const user = notesData[key].user;
                 const timestamp = notesData[key].timestamp;
 
-                // Format date from timestamp
                 const date = new Date(timestamp);
                 const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
@@ -48,8 +80,8 @@ window.onload = function() {
             li.textContent = "No notes found.";
             notesList.appendChild(li);
         }
-    }).catch((error) => {
+    } catch (error) {
+        loadingMessage.style.display = 'none';  // Hide loading message on error
         console.error("Error fetching notes:", error);
-    });
-};
-
+    }
+}
