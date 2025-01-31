@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
 
-// Firebase configuration
+// Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDZAnKjWmv3cWhwOXpL7UjRgOpwK6mQVi0",
     authDomain: "django-eb349.firebaseapp.com",
@@ -16,51 +16,40 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-window.onload = function() {
-    fetchNotes();
-};
-
-function fetchNotes() {
+// Fetch and display notes without edit or delete options
+window.onload = function () {
     const notesList = document.getElementById('notesList');
-    notesList.innerHTML = '';  // Clear the existing notes
+    notesList.innerHTML = ''; // Clear the existing notes
 
     const notesRef = ref(database, 'notes');
-    get(notesRef)
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                const notesData = snapshot.val();
-                Object.keys(notesData).forEach(key => {
-                    const noteData = notesData[key];
-                    const noteText = noteData.note || 'No Note Text';
-                    const user = noteData.user || 'Anonymous';
-                    const timestamp = noteData.timestamp || Date.now();
+    get(notesRef).then((snapshot) => {
+        if (snapshot.exists()) {
+            const notesData = snapshot.val();
+            Object.keys(notesData).forEach(key => {
+                const note = notesData[key].note;
+                const user = notesData[key].user;
+                const timestamp = notesData[key].timestamp;
 
-                    // Format date from timestamp
-                    const date = new Date(timestamp);
-                    const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                // Format date from timestamp (optional)
+                const date = new Date(timestamp);
+                const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-                    // Append note to the list
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <div class="note-user">${user}</div>
-                        <div class="note-timestamp">${formattedDate}</div>
-                        <div class="note-text">${noteText}</div>
-                    `;
-                    notesList.appendChild(li);
-                });
-            } else {
-                displayNoNotesFound(notesList);
-            }
-        })
-        .catch((error) => {
-            console.error("Error fetching notes:", error);
-            displayNoNotesFound(notesList);
-        });
-}
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div class="note-user">${user}</div>
+                    <div class="note-timestamp">${formattedDate}</div>
+                    <div class="note-text">${note}</div>
+                `;
+                notesList.appendChild(li);
+            });
+        } else {
+            const noNotesMessage = document.createElement('li');
+            noNotesMessage.classList.add('no-notes');
+            noNotesMessage.textContent = "No notes available!";
+            notesList.appendChild(noNotesMessage);
+        }
+    }).catch((error) => {
+        console.error("Error fetching notes:", error);
+    });
+};
 
-function displayNoNotesFound(container) {
-    const li = document.createElement('li');
-    li.classList.add('no-notes');
-    li.textContent = "No notes found.";
-    container.appendChild(li);
-}
