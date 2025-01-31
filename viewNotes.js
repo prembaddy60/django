@@ -16,39 +16,51 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Fetch and display notes
 window.onload = function() {
+    fetchNotes();
+};
+
+function fetchNotes() {
     const notesList = document.getElementById('notesList');
     notesList.innerHTML = '';  // Clear the existing notes
 
     const notesRef = ref(database, 'notes');
-    get(notesRef).then((snapshot) => {
-        if (snapshot.exists()) {
-            const notesData = snapshot.val();
-            Object.keys(notesData).forEach(key => {
-                const note = notesData[key].note;
-                const user = notesData[key].user;
-                const timestamp = notesData[key].timestamp;
+    get(notesRef)
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                const notesData = snapshot.val();
+                Object.keys(notesData).forEach(key => {
+                    const noteData = notesData[key];
+                    const noteText = noteData.note || 'No Note Text';
+                    const user = noteData.user || 'Anonymous';
+                    const timestamp = noteData.timestamp || Date.now();
 
-                // Format date from timestamp
-                const date = new Date(timestamp);
-                const formattedDate = ${date.toLocaleDateString()} ${date.toLocaleTimeString()};
+                    // Format date from timestamp
+                    const date = new Date(timestamp);
+                    const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-                const li = document.createElement('li');
-                li.innerHTML = 
-                    <div class="note-user">${user}</div>
-                    <div class="note-timestamp">${formattedDate}</div>
-                    <div class="note-text">${note}</div>
-                ;
-                notesList.appendChild(li);
-            });
-        } else {
-            const li = document.createElement('li');
-            li.classList.add('no-notes');
-            li.textContent = "No notes found.";
-            notesList.appendChild(li);
-        }
-    }).catch((error) => {
-        console.error("Error fetching notes:", error);
-    });
-};
+                    // Append note to the list
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <div class="note-user">${user}</div>
+                        <div class="note-timestamp">${formattedDate}</div>
+                        <div class="note-text">${noteText}</div>
+                    `;
+                    notesList.appendChild(li);
+                });
+            } else {
+                displayNoNotesFound(notesList);
+            }
+        })
+        .catch((error) => {
+            console.error("Error fetching notes:", error);
+            displayNoNotesFound(notesList);
+        });
+}
+
+function displayNoNotesFound(container) {
+    const li = document.createElement('li');
+    li.classList.add('no-notes');
+    li.textContent = "No notes found.";
+    container.appendChild(li);
+}
