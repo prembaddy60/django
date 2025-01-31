@@ -16,40 +16,41 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Fetch and display notes without edit or delete options
+// Fetch and display notes
 window.onload = function () {
     const notesList = document.getElementById('notesList');
     notesList.innerHTML = ''; // Clear the existing notes
 
     const notesRef = ref(database, 'notes');
-    get(notesRef).then((snapshot) => {
-        if (snapshot.exists()) {
-            const notesData = snapshot.val();
-            Object.keys(notesData).forEach(key => {
-                const note = notesData[key].note;
-                const user = notesData[key].user;
-                const timestamp = notesData[key].timestamp;
+    get(notesRef)
+        .then(snapshot => {
+            if (snapshot.exists()) {
+                const notesData = snapshot.val();
+                Object.keys(notesData).forEach(key => {
+                    const note = notesData[key].note;
+                    const user = notesData[key].user;
+                    const timestamp = notesData[key].timestamp;
 
-                // Format date from timestamp (optional)
-                const date = new Date(timestamp);
-                const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+                    // Format date from timestamp
+                    const date = new Date(timestamp);
+                    const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <div class="note-user">${user}</div>
-                    <div class="note-timestamp">${formattedDate}</div>
-                    <div class="note-text">${note}</div>
-                `;
-                notesList.appendChild(li);
-            });
-        } else {
-            const noNotesMessage = document.createElement('li');
-            noNotesMessage.classList.add('no-notes');
-            noNotesMessage.textContent = "No notes available!";
-            notesList.appendChild(noNotesMessage);
-        }
-    }).catch((error) => {
-        console.error("Error fetching notes:", error);
-    });
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <div class="note-user">${user}</div>
+                        <div class="note-timestamp">${formattedDate}</div>
+                        <div class="note-text">${note}</div>
+                    `;
+                    notesList.appendChild(li);
+                });
+            } else {
+                const noNotesMessage = document.createElement('li');
+                noNotesMessage.classList.add('no-notes');
+                noNotesMessage.textContent = "No notes available!";
+                notesList.appendChild(noNotesMessage);
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching notes:", error);
+        });
 };
-
