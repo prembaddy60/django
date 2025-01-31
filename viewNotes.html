@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,13 +11,29 @@
 </head>
 <body>
 
-    <div class="container">
-        <h1>Converstation</h1>
+    <!-- Login Form -->
+    <div id="loginForm">
+        <h2>Login</h2>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br><br>
+        <button onclick="login()">Login</button>
+        <p id="errorMessage" style="color: red; display: none;">Invalid username or password.</p>
+    </div>
+
+    <!-- Notes Display Section (hidden initially) -->
+    <div class="container" style="display:none;" id="mainContent">
+        <h1>Conversation</h1>
+        <div id="loadingMessage">Loading notes...</div> <!-- Loading message -->
         <ul id="notesList"></ul> <!-- The list where notes will be displayed -->
     </div>
 
 </body>
 </html>
+
 
 
 
